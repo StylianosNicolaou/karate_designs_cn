@@ -16,7 +16,7 @@ export default function Loader() {
     <AnimatePresence>
       {showLoader && (
         <motion.div
-          className="fixed inset-0 z-50 bg-charcoal flex flex-col items-center justify-center gap-4"
+          className="fixed inset-0 z-50 bg-charcoal flex flex-col items-center justify-center gap-6 px-6"
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -26,7 +26,7 @@ export default function Loader() {
           <motion.img
             src="/logo.svg"
             alt="Karate Designs CN Logo"
-            className="w-[500px] h-[500px] sm:w-[600px] sm:h-[600px]"
+            className="w-[260px] h-[260px] sm:w-[400px] sm:h-[400px] max-w-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -35,13 +35,14 @@ export default function Loader() {
 
           {/* Tagline */}
           <motion.p
-            className="text-primary text-lg sm:text-xl font-medium text-center"
+            className="text-primary text-center font-medium text-base sm:text-lg leading-snug"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 0.6, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 1.2, delay: 0.6 }}
           >
-            Design with Discipline. Create with Purpose.
+            Design with Discipline. <br className="block sm:hidden" />
+            Create with Purpose.
           </motion.p>
         </motion.div>
       )}

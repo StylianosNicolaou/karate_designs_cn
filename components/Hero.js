@@ -16,7 +16,7 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Karate Designs CN
+        Karate Designs
       </motion.h1>
 
       {/* Tagline */}
@@ -26,7 +26,8 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
       >
-        Design with Discipline. Create with Purpose.
+        Design with Discipline. <br />
+        Create with Purpose.
       </motion.p>
 
       {/* Call-to-action button */}

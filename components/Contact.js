@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
   const {
@@ -13,16 +14,32 @@ export default function Contact() {
   const [nameValue, setNameValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
   const [messageValue, setMessageValue] = useState("");
-
   const [submitted, setSubmitted] = useState(false);
 
   const onSubmit = async (data) => {
-    // Simulate email sending
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(data);
-    setSubmitted(true);
-    reset();
-    setTimeout(() => setSubmitted(false), 3000);
+    try {
+      await emailjs.send(
+        "service_oa9302r",
+        "template_9sttg0c",
+        data,
+        "l_z94iROq-YLPK4vV"
+      );
+      await emailjs.send(
+        "service_oa9302r",
+        "template_o4gz7co",
+        data,
+        "l_z94iROq-YLPK4vV"
+      );
+
+      setSubmitted(true);
+      reset();
+      setNameValue("");
+      setEmailValue("");
+      setMessageValue("");
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch (err) {
+      console.error("EmailJS Error:", err);
+    }
   };
 
   return (
@@ -45,7 +62,7 @@ export default function Contact() {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
       >
-        {/** Name Field */}
+        {/* Name Field */}
         <div className="relative">
           <input
             type="text"
@@ -54,22 +71,20 @@ export default function Contact() {
             value={nameValue}
             onChange={(e) => setNameValue(e.target.value)}
             className={`w-full px-4 py-5 bg-white/5 text-white border border-white/10 rounded-md
-      placeholder:text-transparent focus:outline-none focus:ring-2 peer
-      ${errors.name ? "ring-red-500" : "focus:ring-primary"}`}
+            placeholder:text-transparent focus:outline-none focus:ring-2 peer
+            ${errors.name ? "ring-red-500" : "focus:ring-primary"}`}
           />
           <label
             className={`absolute left-4 text-gray-500 text-sm transition-all
-      ${
-        nameValue
-          ? "top-0.5 text-sm text-primary"
-          : "top-5 text-base text-gray-500"
-      }`}
+              ${
+                nameValue ? "top-0.5 text-sm text-primary" : "top-5 text-base"
+              }`}
           >
             Name
           </label>
         </div>
 
-        {/** Email Field */}
+        {/* Email Field */}
         <div className="relative">
           <input
             type="email"
@@ -83,41 +98,40 @@ export default function Contact() {
           />
           <label
             className={`absolute left-4 text-gray-500 text-sm transition-all
-    ${
-      emailValue
-        ? "top-0.5 text-sm text-primary"
-        : "top-5 text-base text-gray-500"
-    }`}
+              ${
+                emailValue ? "top-0.5 text-sm text-primary" : "top-5 text-base"
+              }`}
           >
             Email
           </label>
         </div>
 
-        {/** Message Field */}
+        {/* Message Field */}
         <div className="relative">
           <textarea
             rows={4}
             {...register("message", { required: true })}
             value={messageValue}
             onChange={(e) => setMessageValue(e.target.value)}
-            placeholder={messageValue ? "" : "Your Message"}
+            placeholder="Your Message"
             className={`w-full px-4 py-5 bg-white/5 text-white border border-white/10 rounded-md 
-    focus:outline-none focus:ring-2 peer resize-none
-    placeholder-gray-500
-    ${errors.message ? "ring-red-500" : "focus:ring-primary"}`}
+              focus:outline-none focus:ring-2 peer resize-none
+              placeholder-transparent
+              ${errors.message ? "ring-red-500" : "focus:ring-primary"}`}
           />
-
           <label
             className={`absolute left-4 text-gray-500 text-sm transition-all
-      ${
-        messageValue
-          ? "top-2 text-sm text-primary"
-          : "top-5 text-base text-gray-500"
-      }`}
-          ></label>
+              ${
+                messageValue
+                  ? "top-0.5 text-sm text-primary"
+                  : "top-5 text-base"
+              }`}
+          >
+            Your Message
+          </label>
         </div>
 
-        {/** Submit Button */}
+        {/* Submit Button */}
         <motion.button
           type="submit"
           disabled={isSubmitting}
