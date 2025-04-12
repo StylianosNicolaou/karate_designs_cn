@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Masonry from "react-masonry-css";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const galleryImages = [
   "/images/poster1.jpg",
@@ -28,6 +27,7 @@ const item = {
 
 export default function Gallery() {
   const [selected, setSelected] = useState(null);
+
   useEffect(() => {
     const handleKey = (e) => {
       if (e.key === "Escape") setSelected(null);
@@ -40,13 +40,13 @@ export default function Gallery() {
     default: 3,
     1024: 3,
     768: 2,
-    480: 1,
+    0: 1, // Ensure full width on smallest screens
   };
 
   return (
-    <section id="gallery" className="py-20 px-6 max-w-7xl mx-auto">
+    <section id="gallery" className="py-20 px-4 sm:px-6 max-w-7xl mx-auto">
       <motion.h2
-        className="text-3xl md:text-4xl font-semibold text-center mb-12"
+        className="text-3xl sm:text-4xl font-semibold text-center mb-12 text-white"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -65,13 +65,13 @@ export default function Gallery() {
       >
         <Masonry
           breakpointCols={breakpointColumnsObj}
-          className="flex w-auto gap-6"
+          className="flex w-auto gap-4 sm:gap-6"
           columnClassName="masonry-column"
         >
           {galleryImages.map((src, i) => (
             <motion.div
               key={i}
-              className="mb-6 overflow-hidden rounded-xl shadow-md transform hover:scale-105 hover:grayscale-0 grayscale transition duration-300 cursor-pointer hover:shadow-red-500/30"
+              className="mb-4 sm:mb-6 overflow-hidden rounded-xl shadow-md transform hover:scale-105 hover:grayscale-0 grayscale transition duration-300 cursor-pointer hover:shadow-red-500/30"
               variants={item}
               layout
               onClick={() => setSelected(src)}
@@ -91,7 +91,7 @@ export default function Gallery() {
       <AnimatePresence>
         {selected && (
           <motion.div
-            className="fixed inset-0 z-50 bg-black/90 flex justify-center items-center"
+            className="fixed inset-0 z-50 bg-black/90 flex justify-center items-center p-4"
             onClick={() => setSelected(null)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -104,7 +104,7 @@ export default function Gallery() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
-              className="max-h-[90vh] max-w-[90vw] rounded-lg shadow-xl"
+              className="max-h-[80vh] max-w-full rounded-lg shadow-xl"
             />
           </motion.div>
         )}

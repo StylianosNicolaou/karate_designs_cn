@@ -73,9 +73,12 @@ const cardAnimation = {
 
 export default function ServicesGrid() {
   return (
-    <section id="packages" className="py-24 px-6 max-w-7xl mx-auto text-center">
+    <section
+      id="packages"
+      className="py-24 px-4 sm:px-6 max-w-7xl mx-auto text-center"
+    >
       <motion.h2
-        className="text-3xl md:text-4xl font-semibold mb-12"
+        className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-12 text-white"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -84,24 +87,26 @@ export default function ServicesGrid() {
         Our Services
       </motion.h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-10">
         {services.map((service, index) => (
           <motion.div
             key={index}
             className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 shadow-md 
-    transform transition duration-300 ease-in-out
-    hover:-translate-y-2 hover:scale-105 hover:rotate-1 hover:shadow-primary/30"
+              transform transition duration-300 ease-in-out
+              hover:-translate-y-2 hover:scale-105 hover:rotate-1 hover:shadow-primary/30"
             variants={cardAnimation}
             initial="hidden"
             whileInView="visible"
             transition={{ duration: 0.4, delay: index * 0.1 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-xl font-semibold text-white mb-2">
+            <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
               {service.title}
             </h3>
-            <p className="text-gray-300 text-sm mb-4">{service.description}</p>
-            <div className="text-primary font-bold text-lg">
+            <p className="text-gray-300 text-sm sm:text-base mb-4">
+              {service.description}
+            </p>
+            <div className="text-primary font-bold text-base sm:text-lg">
               {service.price}
             </div>
           </motion.div>

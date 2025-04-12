@@ -24,26 +24,28 @@ export default function BrandSection() {
   return (
     <section
       id="brand"
-      className="relative px-6 py-20 max-w-4xl mx-auto text-center"
+      className="relative px-6 py-24 sm:py-28 max-w-4xl mx-auto text-center"
     >
-      {/* Decorative Kanji behind content */}
+      {/* Background Kanji */}
       <div className="absolute inset-0 z-0 flex justify-center items-center opacity-5 pointer-events-none">
-        <p className="text-[360px] font-bold text-white tracking-widest select-none">
+        <p className="text-[180px] sm:text-[260px] md:text-[360px] font-bold text-white tracking-widest select-none leading-none">
           武道
         </p>
       </div>
-      {/* Optional vertical accent bar */}
 
+      {/* Vertical Accent Line */}
       <motion.div
-        className="absolute left-0 top-17 h-56 w-1 bg-primary hidden md:block rounded-full opacity-70 z-10"
+        className="absolute left-0 top-16 h-56 w-1 bg-primary hidden md:block rounded-full opacity-70 z-10"
         initial={{ scaleY: 0 }}
         whileInView={{ scaleY: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: true }}
         style={{ transformOrigin: "top" }}
       />
+
+      {/* Heading */}
       <motion.h2
-        className="text-3xl md:text-4xl font-semibold mb-6"
+        className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 relative z-10 text-white"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -51,8 +53,10 @@ export default function BrandSection() {
       >
         About Karate Designs CN
       </motion.h2>
+
+      {/* Manifesto */}
       <motion.div
-        className="text-lg leading-8 text-gray-300 flex flex-wrap justify-center gap-x-1 z-10 relative"
+        className="text-base sm:text-lg leading-8 text-gray-300 flex flex-wrap justify-center gap-x-1 z-10 relative"
         variants={container}
         initial="hidden"
         whileInView="visible"
@@ -63,21 +67,23 @@ export default function BrandSection() {
             key={i}
             variants={wordAnimation}
             className={`
-        ${
-          word === "Karate" ||
-          word === "Designs" ||
-          word === "CN," ||
-          word === "discipline" ||
-          word === "intention"
-            ? "text-primary font-semibold"
-            : ""
-        }
-        ${
-          word === "precision" || word === "perfection." || word === "clarity."
-            ? "text-gold font-semibold"
-            : ""
-        }
-      `}
+              ${
+                [
+                  "Karate",
+                  "Designs",
+                  "CN,",
+                  "discipline",
+                  "intention",
+                ].includes(word)
+                  ? "text-primary font-semibold"
+                  : ""
+              }
+              ${
+                ["precision", "perfection.", "clarity."].includes(word)
+                  ? "text-gold font-semibold"
+                  : ""
+              }
+            `}
           >
             {word}
           </motion.span>

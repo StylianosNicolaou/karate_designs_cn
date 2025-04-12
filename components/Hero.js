@@ -7,11 +7,11 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative h-screen flex flex-col justify-center items-center text-center px-4"
+      className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 py-24"
     >
       {/* Hero Headline */}
       <motion.h1
-        className="text-5xl md:text-7xl font-bold mb-4"
+        className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-4 text-white leading-tight"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -21,7 +21,7 @@ export default function Hero() {
 
       {/* Tagline */}
       <motion.p
-        className="text-xl md:text-2xl mb-8"
+        className="text-lg sm:text-xl md:text-2xl mb-8 text-white/90 max-w-xl"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
@@ -38,14 +38,6 @@ export default function Hero() {
       >
         View Our Work
       </motion.a>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-gray-300 text-sm"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
-      ></motion.div>
     </section>
   );
 }
