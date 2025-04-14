@@ -1,6 +1,33 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 
+const wordVariant = {
+  hidden: { opacity: 0, y: 10 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.05 },
+  }),
+};
+
+function AnimatedWord({ text, className }) {
+  return (
+    <span className={`inline-block ${className}`}>
+      {text.split("").map((char, i) => (
+        <motion.span
+          key={i}
+          custom={i}
+          initial="hidden"
+          animate="visible"
+          variants={wordVariant}
+          className="inline-block"
+        >
+          {char}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
 export default function Hero() {
   const ref = useRef(null);
 
@@ -16,7 +43,7 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Karate Designs
+        @karate_designs.cn
       </motion.h1>
 
       {/* Tagline */}
@@ -26,19 +53,12 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.8 }}
       >
-        Design with Discipline. <br />
-        Create with Purpose.
+        <br />
+        Design with <AnimatedWord text="Discipline" className="text-gold" />
+        .
+        <br />
+        Create with <AnimatedWord text="Purpose" className="text-primary" />.
       </motion.p>
-
-      {/* Call-to-action button */}
-      <motion.a
-        href="#gallery"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="px-6 py-3 bg-primary text-white rounded-lg font-semibold tracking-wide shadow-lg hover:shadow-xl transition"
-      >
-        View Our Work
-      </motion.a>
     </section>
   );
 }

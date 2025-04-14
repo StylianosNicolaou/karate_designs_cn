@@ -13,6 +13,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
+        caudex: ["Caudex", "sans-serif"],
       },
     },
   },

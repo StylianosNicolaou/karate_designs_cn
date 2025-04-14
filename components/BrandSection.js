@@ -35,9 +35,9 @@ export default function BrandSection() {
 
       {/* Vertical Accent Line */}
       <motion.div
-        className="absolute left-0 top-16 h-56 w-1 bg-primary hidden md:block rounded-full opacity-70 z-10"
+        className="absolute left-0 top-18 h-56 w-1 bg-primary hidden md:block rounded-full opacity-70 z-10"
         initial={{ scaleY: 0 }}
-        whileInView={{ scaleY: 1 }}
+        whileInView={{ scaleY: 0.9 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         viewport={{ once: true }}
         style={{ transformOrigin: "top" }}
