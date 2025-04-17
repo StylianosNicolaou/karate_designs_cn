@@ -85,6 +85,18 @@ export default function Gallery() {
             </motion.div>
           ))}
         </Masonry>
+        <div className="text-center mt-12">
+          <motion.a
+            href="https://www.instagram.com/karate_designs.cn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-block bg-primary text-white px-6 py-3 rounded-md font-semibold tracking-wide transition shadow-lg hover:shadow-red-500/30"
+          >
+            See More on Instagram →
+          </motion.a>
+        </div>
       </motion.div>
 
       {/* Lightbox Modal */}
