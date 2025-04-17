@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaTshirt,
@@ -10,6 +9,8 @@ import {
   FaChevronDown,
   FaChevronUp,
 } from "react-icons/fa";
+import { useState, useRef } from "react";
+
 const categories = [
   {
     icon: <FaTshirt className="text-primary text-xl" />,
@@ -176,9 +177,19 @@ const categories = [
 
 export default function ServicesGrid() {
   const [openIndex, setOpenIndex] = useState(null);
+  const refs = useRef([]);
 
   const toggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+    const alreadyOpen = openIndex === index;
+    setOpenIndex(alreadyOpen ? null : index);
+    if (!alreadyOpen && refs.current[index]) {
+      setTimeout(() => {
+        refs.current[index].scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100); // slight delay for smoother scroll after opening
+    }
   };
 
   return (
@@ -200,6 +211,7 @@ export default function ServicesGrid() {
         {categories.map((cat, idx) => (
           <motion.div
             key={idx}
+            ref={(el) => (refs.current[idx] = el)} // Store refs for scrolling
             className="bg-white/5 border border-white/10 backdrop-blur-md rounded-xl text-left overflow-hidden"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
