@@ -182,13 +182,17 @@ export default function ServicesGrid() {
   const toggle = (index) => {
     const alreadyOpen = openIndex === index;
     setOpenIndex(alreadyOpen ? null : index);
-    if (!alreadyOpen && refs.current[index]) {
+
+    if (!alreadyOpen) {
+      // Delay scroll to allow expansion
       setTimeout(() => {
-        refs.current[index].scrollIntoView({
-          behavior: "smooth",
-          block: "start",
+        requestAnimationFrame(() => {
+          refs.current[index]?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
         });
-      }, 100); // slight delay for smoother scroll after opening
+      }, 500); // Matches the animation duration
     }
   };
 
@@ -211,7 +215,7 @@ export default function ServicesGrid() {
         {categories.map((cat, idx) => (
           <motion.div
             key={idx}
-            ref={(el) => (refs.current[idx] = el)} // Store refs for scrolling
+            ref={(el) => (refs.current[idx] = el)}
             className="bg-white/5 border border-white/10 backdrop-blur-md rounded-xl text-left overflow-hidden"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
