@@ -8,6 +8,7 @@ const galleryImages = [
   "/images/poster3.jpg",
   "/images/poster4.jpg",
   "/images/poster5.jpg",
+  "/images/poster6.jpg",
 ];
 
 const container = {
