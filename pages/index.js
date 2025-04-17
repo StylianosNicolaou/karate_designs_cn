@@ -65,7 +65,6 @@ export default function Home() {
         <BrandSection />
         <Gallery />
         <ServicesGrid />
-
         <Contact />
         <BackToTop />
       </main>
