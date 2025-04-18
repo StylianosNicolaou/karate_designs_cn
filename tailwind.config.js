@@ -15,6 +15,12 @@ module.exports = {
         sans: ["Poppins", "sans-serif"],
         caudex: ["Caudex", "sans-serif"],
       },
+      maxWidth: {
+        1600: "1600px",
+      },
+      aspectRatio: {
+        "4/5": "4 / 5",
+      },
     },
   },
   plugins: [],
