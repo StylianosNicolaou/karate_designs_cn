@@ -14,6 +14,7 @@ export default function Home() {
       <Head>
         <title>Karate Designs CN | Design with Discipline</title>
         <link rel="icon" href="/favicon-64x64.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
           content="Karate Designs CN is a creative studio offering premium branding, website, and design services inspired by discipline and precision."
