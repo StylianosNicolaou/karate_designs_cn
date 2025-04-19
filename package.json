@@ -15,6 +15,7 @@
     "@tsparticles/basic": "^3.8.1",
     "@tsparticles/engine": "^3.8.1",
     "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^12.6.5",
     "gsap": "^3.12.7",

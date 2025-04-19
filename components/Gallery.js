@@ -22,7 +22,7 @@ export default function Gallery() {
   });
 
   const yTransforms = [
-    useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]),
+    useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]),
     useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]),
     useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]),
     useTransform(scrollYProgress, [0, 1], ["0%", "-35%"]),
@@ -106,12 +106,6 @@ export default function Gallery() {
                     className="w-full h-auto object-cover aspect-[4/5] min-h-[320px] sm:min-h-[380px] group-hover:scale-105 transition duration-500 rounded-xl"
                   />
                   <div className="absolute bottom-0 left-0 w-full bg-black/70 text-white p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 className="text-base sm:text-lg font-semibold">
-                      {img.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-300">
-                      {img.category}
-                    </p>
                   </div>
                 </motion.div>
               ))}
