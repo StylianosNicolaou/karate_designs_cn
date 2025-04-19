@@ -154,23 +154,43 @@ export default function Hero() {
   });
 
   // Parallax scroll setup
-  const { scrollY } = useScroll();
-  const bgY = useTransform(scrollY, [0, 600], ["0%", "35%"]);
+  //const { scrollY } = useScroll();
+  //const bgY = useTransform(scrollY, [0, 600], ["0%", "35%"]);
 
   return (
     <motion.section
       ref={ref}
       className="aspect-[16/9] sm:aspect-auto relative w-full h-screen flex flex-col justify-center items-center text-center px-6 py-24 bg-no-repeat bg-center bg-contain"
-      style={{
-        backgroundImage:
-          "linear-gradient(to bottom, rgba(29,29,29,0) 40%, #1d1d1d 90%), url('/hero-bg.png')",
+      // style={{
+      //   backgroundImage:
+      //     "linear-gradient(to bottom, rgba(29,29,29,0) 40%, #1d1d1d 90%), url('/hero-bg.png')",
 
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPositionX: "center",
-        backgroundPositionY: bgY,
-      }}
+      //   backgroundSize: "cover",
+      //   backgroundRepeat: "no-repeat",
+      //   backgroundPositionX: "center",
+      //   backgroundPositionY: bgY,
+      // }}
     >
+      {/* 🔥 Kling MP4 Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        style={{ objectPosition: 'center' }}
+      >
+        <source src="/videos/hero-animation3.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* 🔥 Gradient overlay */}
+  <div
+    className="absolute inset-0 z-10 pointer-events-none"
+    style={{
+      background: 'linear-gradient(to bottom, rgba(29,29,29,0) 85%, #1d1d1d 98%)'
+    }}
+  />
       {/* Animated Particles Layer
       <div className="absolute inset-0 z-0">
         <ParticlesBackground />
