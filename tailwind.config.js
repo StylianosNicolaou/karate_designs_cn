@@ -15,6 +15,10 @@ module.exports = {
         sans: ["Poppins", "sans-serif"],
         caudex: ["Caudex", "sans-serif"],
       },
+      fontSize: {
+        base: "0.90rem", // Default is 1rem (16px), make it slightly smaller
+        sm: "0.875rem",  // Optional: you can adjust other sizes too
+      },
       maxWidth: {
         1600: "1600px",
       },

@@ -112,31 +112,31 @@ import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { useRef } from "react";
 // import ParticlesBackground from "./ParticlesBackground";
 
-function AnimatedWord({ text, className }) {
-  return (
-    <span className={`inline-block font-heading ${className}`}>
-      {text.split("").map((char, i) => (
-        <motion.span
-          key={i}
-          custom={i}
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0, y: 10 },
-            visible: (i) => ({
-              opacity: 1,
-              y: 0,
-              transition: { delay: i * 0.05 },
-            }),
-          }}
-          className="inline-block"
-        >
-          {char}
-        </motion.span>
-      ))}
-    </span>
-  );
-}
+// function AnimatedWord({ text, className }) {
+//   return (
+//     <span className={`inline-block font-heading ${className}`}>
+//       {text.split("").map((char, i) => (
+//         <motion.span
+//           key={i}
+//           custom={i}
+//           initial="hidden"
+//           animate="visible"
+//           variants={{
+//             hidden: { opacity: 0, y: 10 },
+//             visible: (i) => ({
+//               opacity: 1,
+//               y: 0,
+//               transition: { delay: i * 0.05 },
+//             }),
+//           }}
+//           className="inline-block"
+//         >
+//           {char}
+//         </motion.span>
+//       ))}
+//     </span>
+//   );
+// }
 
 export default function Hero() {
   const ref = useRef(null);
@@ -185,7 +185,7 @@ export default function Hero() {
         <Cursor cursorStyle="|" cursorColor="#e63946" />
       </motion.h1>
 
-      <motion.p
+      {/* <motion.p
         className="text-lg sm:text-xl md:text-2xl mb-8 text-white/90 max-w-xl leading-relaxed z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -196,7 +196,7 @@ export default function Hero() {
         <br />
         Create with{" "}
         <AnimatedWord text="Purpose" className="text-primary font-semibold" />.
-      </motion.p>
+      </motion.p> */}
 
       <motion.a
         href="#gallery"
@@ -211,7 +211,7 @@ export default function Hero() {
       </motion.a>
 
       <motion.p
-        className="text-sm sm:text-base text-gray-400 mt-6 italic z-10"
+        className="text-sm sm:text-base text-gray-200 mt-6 italic z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 1 }}

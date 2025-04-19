@@ -15,20 +15,13 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Branding */}
         <div className="text-sm tracking-wide font-medium">
-          &copy; {year} Karate Designs CN. All rights reserved.
-        </div>
-
-        {/* Quick Links */}
-        <div className="flex gap-6 text-sm">
-          <a href="#gallery" className="hover:text-white transition">
-            Gallery
-          </a>
-          <a href="#packages" className="hover:text-white transition">
-            Packages
-          </a>
-          <a href="#contact" className="hover:text-white transition">
-            Contact
-          </a>
+          &copy; {year}{" "}
+          <a
+            href="mailto:stylianosnicolaou@gmail.com"
+            className="text-primary hover:text-primary/80 transition"
+          >
+            Stylianos Nicolaou
+          </a>. All rights reserved.
         </div>
 
         {/* Socials */}

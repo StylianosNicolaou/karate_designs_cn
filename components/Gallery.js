@@ -22,10 +22,10 @@ export default function Gallery() {
   });
 
   const yTransforms = [
-    useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]),
-    useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]),
-    useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]),
-    useTransform(scrollYProgress, [0, 1], ["0%", "-35%"]),
+    useTransform(scrollYProgress, [0, 1], ["0%", "-6%"]),
+    useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]),
+    useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]),
+    useTransform(scrollYProgress, [0, 1], ["0%", "-24%"]),
   ];
 
   const [isMobile, setIsMobile] = useState(false);
@@ -46,19 +46,19 @@ export default function Gallery() {
   const columns = [
     {
       style: isMobile ? { y: yTransforms[0] } : { y: yTransforms[0] },
-      images: galleryImages.slice(0, 7), // 0–5
+      images: galleryImages.slice(0, 6), // 0–5
     },
     {
       style: isMobile ? { y: yTransforms[2] } : { y: yTransforms[1] },
-      images: galleryImages.slice(7, 14), // 6–12
+      images: galleryImages.slice(6, 12), // 6–12
     },
     {
       style: isMobile ? { y: yTransforms[0] } : { y: yTransforms[2] },
-      images: galleryImages.slice(14, 21), // 13–18
+      images: galleryImages.slice(12, 18), // 13–18
     },
     {
       style: isMobile ? { y: yTransforms[2] } : { y: yTransforms[3] },
-      images: galleryImages.slice(21, 28), // 19–25
+      images: galleryImages.slice(18, 24), // 19–25
     },
   ];
 
