@@ -107,7 +107,7 @@
 // }
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { useRef } from "react";
 // import ParticlesBackground from "./ParticlesBackground";
