@@ -8,7 +8,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 
-const galleryImages = Array.from({ length: 26 }, (_, i) => ({
+const galleryImages = Array.from({ length: 28 }, (_, i) => ({
   src: `/images/poster${i + 1}.jpg`,
   title: `Poster ${i + 1}`,
   category: "Creative",
@@ -18,20 +18,48 @@ export default function Gallery() {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"],
+    offset: ["start 0.5", "end start"], // previously "start end"
   });
 
-  // Alternating directions
-  const translateY1 = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
-  const translateY2 = useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]);
-  const translateY3 = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
-  const translateY4 = useTransform(scrollYProgress, [0, 1], ["0%", "-35%"]);
+  const yTransforms = [
+    useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]),
+    useTransform(scrollYProgress, [0, 1], ["0%", "-25%"]),
+    useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]),
+    useTransform(scrollYProgress, [0, 1], ["0%", "-35%"]),
+  ];
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      if (typeof window !== "undefined") {
+        setIsMobile(window.innerWidth < 1024);
+      }
+    };
+
+    checkMobile(); // run on mount
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const columns = [
-    { style: { y: translateY1 }, images: galleryImages.slice(0, 6) },
-    { style: { y: translateY2 }, images: galleryImages.slice(6, 13) },
-    { style: { y: translateY3 }, images: galleryImages.slice(13, 19) },
-    { style: { y: translateY4 }, images: galleryImages.slice(19, 26) },
+    {
+      style: isMobile ? { y: yTransforms[0] } : { y: yTransforms[0] },
+      images: galleryImages.slice(0, 7), // 0–5
+    },
+    {
+      style: isMobile ? { y: yTransforms[2] } : { y: yTransforms[1] },
+      images: galleryImages.slice(7, 14), // 6–12
+    },
+    {
+      style: isMobile ? { y: yTransforms[0] } : { y: yTransforms[2] },
+      images: galleryImages.slice(14, 21), // 13–18
+    },
+    {
+      style: isMobile ? { y: yTransforms[2] } : { y: yTransforms[3] },
+      images: galleryImages.slice(21, 28), // 19–25
+    },
   ];
 
   const [selected, setSelected] = useState(null);
@@ -44,7 +72,7 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section id="gallery" className="py-24 px-4 sm:px-6 max-w-[1600px] mx-auto">
+    <section id="gallery" className="pt-24 pb-8 px-4 sm:px-8 w-full">
       <motion.h2
         className="text-3xl sm:text-4xl font-semibold text-center mb-16 text-white"
         initial={{ opacity: 0, y: 30 }}
@@ -55,36 +83,62 @@ export default function Gallery() {
         Our Work
       </motion.h2>
 
-      <div className="relative w-full">
-        <div
-          ref={containerRef}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 w-full items-start overflow-visible"
-        >
+      <div ref={containerRef}>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full">
           {columns.map((col, idx) => (
             <motion.div
               key={idx}
-              style={{ ...col.style }}
-              className="space-y-6"
+              style={col.style}
+              className="flex flex-col gap-4 sm:gap-6 flex-1"
             >
               {col.images.map((img, i) => (
-                <div
+                <motion.div
                   key={i}
                   className="relative group overflow-hidden rounded-xl cursor-pointer"
+                  whileInView={isMobile ? "visible" : false}
+                  viewport={{ once: true, amount: 0.2 }}
+                  custom={i}
                   onClick={() => setSelected(img.src)}
                 >
                   <img
                     src={img.src}
                     alt={img.title}
-                    className="w-full h-auto object-cover rounded-xl group-hover:scale-105 transition duration-500"
+                    className="w-full h-auto object-cover aspect-[4/5] min-h-[320px] sm:min-h-[380px] group-hover:scale-105 transition duration-500 rounded-xl"
                   />
-                </div>
+                  <div className="absolute bottom-0 left-0 w-full bg-black/70 text-white p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 className="text-base sm:text-lg font-semibold">
+                      {img.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-gray-300">
+                      {img.category}
+                    </p>
+                  </div>
+                </motion.div>
               ))}
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Lightbox Modal */}
+      {/* Instagram CTA */}
+      <motion.div
+        className="text-center pt-8"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <a
+          href="https://www.instagram.com/karate_designs.cn/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block bg-primary text-white px-6 py-3 rounded-md font-semibold tracking-wide transition shadow-lg hover:shadow-red-500/30"
+        >
+          See More on Instagram →
+        </a>
+      </motion.div>
+
+      {/* Lightbox */}
       <AnimatePresence>
         {selected && (
           <motion.div

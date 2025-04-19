@@ -18,9 +18,6 @@ module.exports = {
       maxWidth: {
         1600: "1600px",
       },
-      aspectRatio: {
-        "4/5": "4 / 5",
-      },
     },
   },
   plugins: [],

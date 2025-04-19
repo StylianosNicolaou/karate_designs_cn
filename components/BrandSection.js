@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+// import ParticlesBackground from "./ParticlesBackground";
 
 const container = {
   hidden: {},
@@ -26,12 +27,12 @@ export default function BrandSection() {
       id="brand"
       className="relative px-6 py-24 sm:py-28 max-w-4xl mx-auto text-center"
     >
-      {/* Background Kanji */}
+      {/* Background Kanji
       <div className="absolute inset-0 z-0 flex justify-center items-center opacity-5 pointer-events-none">
-        <p className="text-[180px] sm:text-[260px] md:text-[360px] font-bold text-white tracking-widest select-none leading-none">
-          武道
-        </p>
-      </div>
+      <p className="text-[180px] sm:text-[260px] md:text-[360px] font-bold text-white tracking-widest select-none leading-none">
+      武道
+      </p>
+      </div> */}
 
       {/* Vertical Accent Line */}
       <motion.div
@@ -43,6 +44,9 @@ export default function BrandSection() {
         style={{ transformOrigin: "top" }}
       />
 
+      {/* <div className="absolute inset-0 z-0">
+        <ParticlesBackground />
+      </div> */}
       {/* Heading */}
       <motion.h2
         className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 relative z-10 text-white"
