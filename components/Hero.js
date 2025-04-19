@@ -176,7 +176,7 @@ export default function Hero() {
         <ParticlesBackground />
       </div> */}
       <motion.h1
-        className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-4 text-white leading-tight z-10"
+        className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 text-white leading-tight z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
