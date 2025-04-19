@@ -211,7 +211,7 @@ export default function Hero() {
       </motion.a>
 
       <motion.p
-        className="text-sm sm:text-base text-gray-200 mt-6 italic z-10"
+        className="text-sm sm:text-m text-gray-200 mt-6 italic z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 1 }}

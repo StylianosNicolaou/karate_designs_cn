@@ -74,7 +74,7 @@ export default function Gallery() {
   return (
     <section id="gallery" className="pt-24 pb-8 px-4 sm:px-8 w-full">
       <motion.h2
-        className="text-3xl sm:text-4xl font-semibold text-center mb-16 text-white"
+        className="text-xl sm:text-3xl font-semibold text-center mb-16 text-white"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

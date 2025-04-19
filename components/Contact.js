@@ -45,7 +45,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-24 px-6 max-w-4xl mx-auto text-center">
       <motion.h2
-        className="text-3xl md:text-4xl font-semibold mb-10"
+        className="text-xl md:text-3xl font-semibold mb-10"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

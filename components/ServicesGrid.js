@@ -202,7 +202,7 @@ export default function ServicesGrid() {
       className="py-24 px-4 sm:px-6 max-w-7xl mx-auto text-center"
     >
       <motion.h2
-        className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-12 text-white"
+        className="text-xl sm:text-xl md:text-3xl font-semibold mb-12 text-white"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -225,7 +225,7 @@ export default function ServicesGrid() {
             {/* Header */}
             <button
               onClick={() => toggle(idx)}
-              className="w-full flex justify-between items-center px-6 py-4 text-white font-medium text-lg sm:text-xl hover:bg-white/10 transition"
+              className="w-full flex justify-between items-center px-6 py-4 text-white font-medium text-lg sm:text-m hover:bg-white/10 transition"
             >
               <div className="flex items-center gap-3">
                 {cat.icon}

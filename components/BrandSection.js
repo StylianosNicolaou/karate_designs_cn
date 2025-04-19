@@ -49,7 +49,7 @@ export default function BrandSection() {
       </div> */}
       {/* Heading */}
       <motion.h2
-        className="text-2xl sm:text-3xl md:text-4xl font-semibold mb-6 relative z-10 text-white"
+        className="text-xl sm:text-xl md:text-3xl font-semibold mb-6 relative z-10 text-white"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -60,7 +60,7 @@ export default function BrandSection() {
 
       {/* Manifesto */}
       <motion.div
-        className="text-base sm:text-lg leading-8 text-gray-300 flex flex-wrap justify-center gap-x-1 z-10 relative"
+        className="text-base sm:text-m leading-8 text-gray-300 flex flex-wrap justify-center gap-x-1 z-10 relative"
         variants={container}
         initial="hidden"
         whileInView="visible"
