@@ -5,14 +5,14 @@ import { useRef } from "react";
 
 export default function Hero() {
   const ref = useRef(null);
-  
+
   const [text] = useTypewriter({
     words: [
       "@karate_designs.cn",
       "Designing with Discipline.",
       "Creating with Purpose.",
       "Crafting with Precision.",
-      "blah blah with Intention.",
+      "Innovation with Intention.",
     ],
     loop: 0,
     delaySpeed: 2000,
@@ -39,19 +39,20 @@ export default function Hero() {
         muted
         playsInline
         className="absolute inset-0 w-full h-full object-cover z-0"
-        style={{ objectPosition: 'center' }}
+        style={{ objectPosition: "center" }}
       >
         <source src="/videos/hero-animation3.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
       {/* 🔥 Gradient overlay */}
-  <div
-    className="absolute inset-0 z-10 pointer-events-none"
-    style={{
-      background: 'linear-gradient(to bottom, rgba(29,29,29,0) 85%, #1d1d1d 98%)'
-    }}
-  />
+      <div
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(29,29,29,0) 85%, #1d1d1d 98%)",
+        }}
+      />
       <motion.h1
         className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 text-white leading-tight z-10"
         initial={{ opacity: 0 }}
