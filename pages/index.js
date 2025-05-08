@@ -37,9 +37,9 @@ export default function Home() {
         />
         <meta
           property="og:image"
-          content="https://yourdomain.com/og-preview.jpg"
+          content="https://karatedesignscn.com/logo.png"
         />
-        <meta property="og:url" content="https://yourdomain.com" />
+        <meta property="og:url" content="https://karatedesignscn.com" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -53,7 +53,7 @@ export default function Home() {
         />
         <meta
           name="twitter:image"
-          content="https://yourdomain.com/og-preview.jpg"
+          content="https://karatedesignscn.com/logo.png"
         />
         <meta name="twitter:site" content="@yourusername" />
 
