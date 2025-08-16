@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import {
   motion,
   useScroll,
@@ -100,13 +101,14 @@ export default function Gallery() {
                   custom={i}
                   onClick={() => setSelected(img.src)}
                 >
-                  <img
+                  <Image
                     src={img.src}
                     alt={img.title}
+                    width={400}
+                    height={500}
                     className="w-full h-auto object-cover aspect-[4/5] min-h-[320px] sm:min-h-[380px] group-hover:scale-105 transition duration-500 rounded-xl"
                   />
-                  <div className="absolute bottom-0 left-0 w-full bg-black/70 text-white p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  </div>
+                  <div className="absolute bottom-0 left-0 w-full bg-black/70 text-white p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </motion.div>
               ))}
             </motion.div>
@@ -142,15 +144,21 @@ export default function Gallery() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <motion.img
-              src={selected}
-              alt="Full View"
+            <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
               className="max-h-[80vh] max-w-full rounded-lg shadow-xl"
-            />
+            >
+              <Image
+                src={selected}
+                alt="Full View"
+                width={800}
+                height={600}
+                className="max-h-[80vh] max-w-full rounded-lg shadow-xl"
+              />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

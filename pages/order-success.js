@@ -84,7 +84,7 @@ export default function OrderSuccess() {
           }
           setLoading(false);
         })
-        .catch((err) => {
+        .catch(() => {
           setError("Failed to verify payment");
           setLoading(false);
         });

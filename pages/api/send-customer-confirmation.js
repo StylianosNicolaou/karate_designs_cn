@@ -9,7 +9,6 @@ export default async function handler(req, res) {
   try {
     const { orderData, sessionId } = req.body;
     const {
-      customerName,
       customerEmail,
       socialPlatform,
       socialUsername,
