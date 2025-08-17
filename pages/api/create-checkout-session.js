@@ -3,39 +3,83 @@ import stripe from "../../lib/stripe";
 // Service pricing configuration
 const SERVICE_PRICES = {
   // Poster Design
-  "tournament-poster": { price: 10000, name: "Tournament Poster" }, // $100.00
-  "seminar-poster": { price: 9000, name: "Seminar Poster" }, // $90.00
-  "team-poster": { price: 8000, name: "Team Poster" }, // $80.00
-  "athlete-poster": { price: 8000, name: "Athlete Highlight Poster" },
-  "training-camp-poster": { price: 9000, name: "Training Camp Poster" },
-  "charity-poster": { price: 8000, name: "Charity Event Poster" },
-  "fundraising-poster": { price: 8000, name: "Fundraising Event Poster" },
+  "tournament-poster": { price: 9000, name: "Tournament Poster" }, // €90.00
+  "team-poster": { price: 7000, name: "Team Poster" }, // €70.00
+  "seminar-poster": { price: 8000, name: "Seminar Poster" }, // €80.00
+  "athlete-poster": { price: 7000, name: "Athlete Highlight Poster" }, // €70.00
+  "training-camp-poster": { price: 8000, name: "Training Camp Poster" }, // €80.00
+  "custom-poster": { price: 4500, name: "Custom Poster Design" }, // €45.00
 
   // Banner Design
-  "event-banner": { price: 15000, name: "Event Banner (Indoor & Outdoor)" },
-  "dojo-banner": { price: 13000, name: "Dojo Banner" },
-  "competition-banner": { price: 14000, name: "Competition Banner" },
-  "rollup-banner": { price: 12000, name: "Roll-Up Banner" },
-  "welcome-banner": { price: 13000, name: "Welcome Banner for Tournaments" },
-  "podium-banner": { price: 16000, name: "Podium Backdrop Banner" },
-  "large-banner": { price: 20000, name: "Large Format Banner (e.g., 4x3m)" },
+  "event-banner": { price: 13000, name: "Event Banner" }, // €130.00
+  "dojo-banner": { price: 12000, name: "Dojo Banner" }, // €120.00
+  "competition-banner": { price: 12000, name: "Competition Banner" }, // €120.00
+  "rollup-banner": { price: 11000, name: "Roll-Up Banner" }, // €110.00
+  "social-media-banner": {
+    price: 6000,
+    name: "Social Media Banner (FB/Twitter/YouTube)",
+  }, // €60.00
 
   // Logo Design
-  "dojo-logo": { price: 15000, name: "Karate Dojo Logo" },
-  "tournament-logo": { price: 15000, name: "Tournament Logo" },
-  "event-logo": { price: 14000, name: "Event Branding Logo" },
-  "athlete-logo": { price: 13000, name: "Personal Brand Logo for Athletes" },
-  "mascot-logo": { price: 18000, name: "Mascot Logo for Teams" },
-  "patch-logo": { price: 10000, name: "Patch Logo for Gi (Uniform)" },
+  "dojo-logo": { price: 14000, name: "Karate Dojo Logo" }, // €140.00
+  "tournament-logo": { price: 14000, name: "Tournament Logo" }, // €140.00
+  "athlete-logo": { price: 12000, name: "Personal Brand Logo" }, // €120.00
+  "mascot-logo": { price: 16000, name: "Mascot Logo for Teams" }, // €160.00
+  "minimal-logo": { price: 11000, name: "Minimal/Modern Logo (general use)" }, // €110.00
+
+  // Social Media Graphics
+  "instagram-post-pack": { price: 7000, name: "Instagram Post Pack (5 posts)" }, // €70.00
+  "instagram-story-pack": {
+    price: 6000,
+    name: "Instagram Story Pack (5 stories)",
+  }, // €60.00
+  "social-media-ad": { price: 4000, name: "Facebook/Instagram Ad Design" }, // €40.00
+  "athlete-social-pack": {
+    price: 12000,
+    name: "Athlete/Dojo Social Pack (10 posts + 5 stories)",
+  }, // €120.00
+
+  // Merch & Apparel Design
+  "tshirt-design": { price: 6000, name: "T-Shirt Design" }, // €60.00
+  "hoodie-design": { price: 7000, name: "Hoodie Design" }, // €70.00
+  "gi-patch": { price: 5000, name: "Gi Patch / Dojo Patch" }, // €50.00
+  "merchandise-pack": {
+    price: 15000,
+    name: "Merchandise Pack (T-shirt + Hoodie + Patch)",
+  }, // €150.00
+
+  // Event & Dojo Materials
+  "certificate-design": {
+    price: 5000,
+    name: "Certificate Design (Belt / Participation / Achievement)",
+  }, // €50.00
+  "medal-design": { price: 6000, name: "Medal/Ribbon Design" }, // €60.00
+  "ticket-design": { price: 4000, name: "Ticket/Pass Design" }, // €40.00
+  "business-card": { price: 4000, name: "Business Card Design" }, // €40.00
+  "flyer-single": { price: 5000, name: "Flyer/Leaflet (single side)" }, // €50.00
+  "flyer-double": { price: 7000, name: "Flyer/Leaflet (double side)" }, // €70.00
+
+  // Digital & Video Graphics
+  "motion-poster": { price: 9000, name: "Motion Poster / Animated Social Ad" }, // €90.00
+  "video-intro": { price: 12000, name: "Video Intro/Outro" }, // €120.00
+  "tournament-promo-video": {
+    price: 15000,
+    name: "Tournament Promo Video (short edit)",
+  }, // €150.00
 
   // Package Deals
-  "event-package": { price: 25000, name: "Event Branding Package" },
-  "dojo-starter": { price: 35000, name: "Dojo Starter Pack" },
-  "athlete-highlight": { price: 18000, name: "Athlete Highlight Pack" },
-  "tournament-promo": { price: 40000, name: "Tournament Promo Pack" },
-
-  // Default custom poster
-  "custom-poster": { price: 4500, name: "Custom Poster Design" },
+  "event-branding-package": { price: 22000, name: "Event Branding Package" }, // €220.00
+  "dojo-starter-pack": { price: 30000, name: "Dojo Starter Pack" }, // €300.00
+  "athlete-highlight-pack": { price: 15000, name: "Athlete Highlight Pack" }, // €150.00
+  "tournament-promo-pack": { price: 35000, name: "Tournament Promo Pack" }, // €350.00
+  "social-media-growth-pack": {
+    price: 20000,
+    name: "Social Media Growth Pack",
+  }, // €200.00
+  "complete-dojo-identity-pack": {
+    price: 50000,
+    name: "Complete Dojo Identity Pack",
+  }, // €500.00
 };
 
 export default async function handler(req, res) {
