@@ -8,7 +8,7 @@ const SERVICE_PRICES = {
   "seminar-poster": { price: 8000, name: "Seminar Poster" }, // €80.00
   "athlete-poster": { price: 7000, name: "Athlete Highlight Poster" }, // €70.00
   "training-camp-poster": { price: 8000, name: "Training Camp Poster" }, // €80.00
-  "custom-poster": { price: 4500, name: "Custom Poster Design" }, // €45.00
+  "custom-poster": { price: 100, name: "Custom Poster Design" }, // €45.00
 
   // Banner Design
   "event-banner": { price: 13000, name: "Event Banner" }, // €130.00

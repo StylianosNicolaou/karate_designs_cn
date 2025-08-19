@@ -46,7 +46,7 @@ const serviceOptions = [
       {
         id: "custom-poster",
         name: "Custom Poster Design",
-        price: 45,
+        price: 1,
         description: "Fully customized poster for any purpose",
       },
     ],
