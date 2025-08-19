@@ -70,7 +70,7 @@ export default async function handler(req, res) {
 
         // Create public URL
         const publicUrl = `${
-          process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"
+          process.env.NEXT_PUBLIC_DOMAIN || "https://karatedesignscn.com"
         }/uploads/${orderId}/${filename}`;
 
         return {

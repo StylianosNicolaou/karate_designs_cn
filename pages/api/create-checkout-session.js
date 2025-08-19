@@ -155,10 +155,10 @@ export default async function handler(req, res) {
         ],
         mode: "payment",
         success_url: `${
-          process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"
+          process.env.NEXT_PUBLIC_DOMAIN || "https://karatedesignscn.com"
         }/order-success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${
-          process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:3000"
+          process.env.NEXT_PUBLIC_DOMAIN || "https://karatedesignscn.com"
         }/order?cancelled=true`,
         customer_email: email,
         metadata: {
