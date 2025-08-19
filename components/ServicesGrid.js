@@ -45,7 +45,7 @@ const categories = [
       {
         title: "Custom Poster Design",
         desc: "Fully customized poster for any purpose.",
-        price: "€1",
+        price: "€45",
       },
     ],
   },
