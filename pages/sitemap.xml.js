@@ -52,6 +52,16 @@ export const getServerSideProps = async ({ res }) => {
     },
   ];
 
+  // Helper function to escape XML content
+  const escapeXml = (text) => {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
+  };
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
@@ -67,8 +77,8 @@ export const getServerSideProps = async ({ res }) => {
       <priority>${page.priority}</priority>
       <image:image>
         <image:loc>${baseUrl}/logo.png</image:loc>
-        <image:title>${page.title}</image:title>
-        <image:caption>${page.description}</image:caption>
+        <image:title>${escapeXml(page.title)}</image:title>
+        <image:caption>${escapeXml(page.description)}</image:caption>
       </image:image>
     </url>
   `;
