@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://karatedesignscn.com/sitemap.xml
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Allow important pages
+Allow: /
+Allow: /order
+Allow: /checkout
+Allow: /order-success
+
+# Allow static assets
+Allow: /images/
+Allow: /videos/
+Allow: /logo.png
+Allow: /favicon.ico
+
+# Crawl delay (optional)
+Crawl-delay: 1
+
+# Additional sitemaps for comprehensive coverage
+Sitemap: https://karatedesignscn.com/sitemap.xml

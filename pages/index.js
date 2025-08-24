@@ -1,4 +1,4 @@
-import Head from "next/head";
+import SEOHead from "../components/SEOHead";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import BrandSection from "../components/BrandSection";
@@ -11,54 +11,12 @@ import ServicesGrid from "../components/ServicesGrid";
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Karate Designs CN | Design with Discipline</title>
-        <link rel="icon" href="/favicon-64x64.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-          name="description"
-          content="Karate Designs CN is a creative studio offering premium branding, website, and design services inspired by discipline and precision."
-        />
-        <meta
-          name="keywords"
-          content="branding, website design, logo, social media kit, karate design, minimalist, creative agency"
-        />
-        <meta name="author" content="Karate Designs CN" />
-
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="Karate Designs CN | Design with Discipline"
-        />
-        <meta
-          property="og:description"
-          content="Premium creative services with a minimalist, precise aesthetic. View our gallery and discover our custom design packages."
-        />
-        <meta
-          property="og:image"
-          content="https://karatedesignscn.com/logo.png"
-        />
-        <meta property="og:url" content="https://karatedesignscn.com" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Karate Designs CN | Design with Discipline"
-        />
-        <meta
-          name="twitter:description"
-          content="Creative branding and design services inspired by precision and discipline."
-        />
-        <meta
-          name="twitter:image"
-          content="https://karatedesignscn.com/logo.png"
-        />
-        <meta name="twitter:site" content="@yourusername" />
-
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <SEOHead
+        title="Karate Designs & Martial Arts Posters"
+        description="Professional karate designs, martial arts posters, and custom karate artwork. Specializing in karate logo design, tournament posters, and martial arts branding. View our gallery of karate designs and discover our custom design packages."
+        keywords="karate designs, karate posters, martial arts posters, karate artwork, tournament posters, karate logo design, martial arts design, dojo branding, karate tournament artwork, custom karate designs"
+        structuredDataType="website"
+      />
 
       <Navbar />
       <main>

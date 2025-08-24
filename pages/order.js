@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Head from "next/head";
 import { useRouter } from "next/router";
 
 import Navbar from "../components/Navbar";
@@ -9,6 +8,7 @@ import BackToTop from "../components/BackToTop";
 import { useCart } from "../components/CartProvider";
 import { SERVICE_CATALOG, formatPrice } from "../lib/services";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import SEOHead from "../components/SEOHead";
 
 export default function Order() {
   const router = useRouter();
@@ -97,11 +97,11 @@ export default function Order() {
 
   return (
     <>
-      <Head>
-        <title>Order Custom Designs - Karate Designs CN</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon-64x64.png" />
-      </Head>
+      <SEOHead
+        title="Order Custom Designs - Karate Designs CN"
+        description="Choose from our professional design services and add them to your cart. Custom karate designs, logos, and more."
+        keywords="karate designs, custom designs, logo design, martial arts logo, karate logo, custom logo, logo maker, logo creator"
+      />
       <Navbar />
       <main className="min-h-screen pt-24 pb-12">
         <div className="max-w-7xl mx-auto px-6">

@@ -149,14 +149,17 @@ export default function Gallery() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
-              className="max-h-[80vh] max-w-full rounded-lg shadow-xl"
+              className="max-h-[90vh] max-w-[90vw] rounded-lg shadow-xl"
+              onClick={(e) => e.stopPropagation()}
             >
               <Image
                 src={selected}
                 alt="Full View"
-                width={800}
-                height={600}
-                className="max-h-[80vh] max-w-full rounded-lg shadow-xl"
+                width={0}
+                height={0}
+                sizes="90vw"
+                className="w-auto h-auto max-h-[90vh] max-w-[90vw] rounded-lg shadow-xl object-contain"
+                style={{ width: "auto", height: "auto" }}
               />
             </motion.div>
           </motion.div>
