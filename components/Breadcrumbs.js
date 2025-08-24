@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ChevronRightIcon, HomeIcon } from "@heroicons/react/24/outline";
 
 export default function Breadcrumbs({ items = [] }) {
