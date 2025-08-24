@@ -18,10 +18,13 @@ export default async function handler(req, res) {
     // Parse the multipart form data
     const form = formidable({
       maxFiles: 10,
-      maxFileSize: 20 * 1024 * 1024, // 20MB
+      maxFileSize: 15 * 1024 * 1024, // 15MB per file
+      maxTotalFileSize: 50 * 1024 * 1024, // 50MB total
       filter: ({ mimetype }) => {
-        // Only allow images
-        return mimetype && mimetype.startsWith("image/");
+        return (
+          mimetype &&
+          (mimetype.startsWith("image/") || mimetype === "video/mp4")
+        );
       },
     });
 
@@ -38,7 +41,7 @@ export default async function handler(req, res) {
     const fileArray = Object.values(files).flat();
 
     if (fileArray.length === 0) {
-      return res.status(400).json({ error: "No valid image files provided" });
+      return res.status(400).json({ error: "No valid files provided" });
     }
 
     // Upload files to Vercel Blob
@@ -99,7 +102,7 @@ export default async function handler(req, res) {
       success: true,
       orderId: orderId,
       customerName: customerName,
-      uploaded: successfulUploads,
+      uploadedFiles: successfulUploads, // Changed to match checkout page expectation
       failed: failedUploads,
       totalUploaded: successfulUploads.length,
       totalFailed: failedUploads.length,

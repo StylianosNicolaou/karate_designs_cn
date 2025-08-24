@@ -1,87 +1,5 @@
 import stripe from "../../lib/stripe";
 
-// Service pricing configuration
-const SERVICE_PRICES = {
-  // Poster Design
-  "tournament-poster": { price: 9000, name: "Tournament Poster" }, // €90.00
-  "team-poster": { price: 7000, name: "Team Poster" }, // €70.00
-  "seminar-poster": { price: 8000, name: "Seminar Poster" }, // €80.00
-  "athlete-poster": { price: 7000, name: "Athlete Highlight Poster" }, // €70.00
-  "training-camp-poster": { price: 8000, name: "Training Camp Poster" }, // €80.00
-  "custom-poster": { price: 4500, name: "Custom Poster Design" }, // €45.00
-
-  // Banner Design
-  "event-banner": { price: 13000, name: "Event Banner" }, // €130.00
-  "dojo-banner": { price: 12000, name: "Dojo Banner" }, // €120.00
-  "competition-banner": { price: 12000, name: "Competition Banner" }, // €120.00
-  "rollup-banner": { price: 11000, name: "Roll-Up Banner" }, // €110.00
-  "social-media-banner": {
-    price: 6000,
-    name: "Social Media Banner (FB/Twitter/YouTube)",
-  }, // €60.00
-
-  // Logo Design
-  "dojo-logo": { price: 14000, name: "Karate Dojo Logo" }, // €140.00
-  "tournament-logo": { price: 14000, name: "Tournament Logo" }, // €140.00
-  "athlete-logo": { price: 12000, name: "Personal Brand Logo" }, // €120.00
-  "mascot-logo": { price: 16000, name: "Mascot Logo for Teams" }, // €160.00
-  "minimal-logo": { price: 11000, name: "Minimal/Modern Logo (general use)" }, // €110.00
-
-  // Social Media Graphics
-  "instagram-post-pack": { price: 7000, name: "Instagram Post Pack (5 posts)" }, // €70.00
-  "instagram-story-pack": {
-    price: 6000,
-    name: "Instagram Story Pack (5 stories)",
-  }, // €60.00
-  "social-media-ad": { price: 4000, name: "Facebook/Instagram Ad Design" }, // €40.00
-  "athlete-social-pack": {
-    price: 12000,
-    name: "Athlete/Dojo Social Pack (10 posts + 5 stories)",
-  }, // €120.00
-
-  // Merch & Apparel Design
-  "tshirt-design": { price: 6000, name: "T-Shirt Design" }, // €60.00
-  "hoodie-design": { price: 7000, name: "Hoodie Design" }, // €70.00
-  "gi-patch": { price: 5000, name: "Gi Patch / Dojo Patch" }, // €50.00
-  "merchandise-pack": {
-    price: 15000,
-    name: "Merchandise Pack (T-shirt + Hoodie + Patch)",
-  }, // €150.00
-
-  // Event & Dojo Materials
-  "certificate-design": {
-    price: 5000,
-    name: "Certificate Design (Belt / Participation / Achievement)",
-  }, // €50.00
-  "medal-design": { price: 6000, name: "Medal/Ribbon Design" }, // €60.00
-  "ticket-design": { price: 4000, name: "Ticket/Pass Design" }, // €40.00
-  "business-card": { price: 4000, name: "Business Card Design" }, // €40.00
-  "flyer-single": { price: 5000, name: "Flyer/Leaflet (single side)" }, // €50.00
-  "flyer-double": { price: 7000, name: "Flyer/Leaflet (double side)" }, // €70.00
-
-  // Digital & Video Graphics
-  "motion-poster": { price: 9000, name: "Motion Poster / Animated Social Ad" }, // €90.00
-  "video-intro": { price: 12000, name: "Video Intro/Outro" }, // €120.00
-  "tournament-promo-video": {
-    price: 15000,
-    name: "Tournament Promo Video (short edit)",
-  }, // €150.00
-
-  // Package Deals
-  "event-branding-package": { price: 22000, name: "Event Branding Package" }, // €220.00
-  "dojo-starter-pack": { price: 30000, name: "Dojo Starter Pack" }, // €300.00
-  "athlete-highlight-pack": { price: 15000, name: "Athlete Highlight Pack" }, // €150.00
-  "tournament-promo-pack": { price: 35000, name: "Tournament Promo Pack" }, // €350.00
-  "social-media-growth-pack": {
-    price: 20000,
-    name: "Social Media Growth Pack",
-  }, // €200.00
-  "complete-dojo-identity-pack": {
-    price: 50000,
-    name: "Complete Dojo Identity Pack",
-  }, // €500.00
-};
-
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
@@ -92,100 +10,144 @@ export default async function handler(req, res) {
             "Stripe is not properly configured. Please check your environment variables.",
         });
       }
-      const {
-        name,
-        email,
-        socialPlatform,
-        socialUsername,
-        selectedColors,
-        comments,
-        serviceType = "custom-poster", // Default service
-        customPrice, // For custom pricing
-        uploadedFilesCount,
-
-        uploadedFileUrls,
-      } = req.body;
+      const { customerInfo, cartItems } = req.body;
 
       // Validate required fields
-      if (!name || !email || !socialPlatform || !socialUsername) {
+      if (
+        !customerInfo?.name ||
+        !customerInfo?.email ||
+        !customerInfo?.socialPlatform ||
+        !customerInfo?.socialUsername
+      ) {
         return res.status(400).json({
           error:
             "Missing required fields: name, email, social platform, or social username",
         });
       }
 
-      // Get service pricing
-      const serviceConfig =
-        SERVICE_PRICES[serviceType] || SERVICE_PRICES["custom-poster"];
-      const finalPrice = customPrice || serviceConfig.price;
+      // Validate cart items
+      if (!cartItems || !Array.isArray(cartItems) || cartItems.length === 0) {
+        return res.status(400).json({
+          error: "Cart is empty or invalid",
+        });
+      }
 
-      // Create order description
-      const orderDescription = [
-        `Service: ${serviceConfig.name}`,
-        `${socialPlatform}: ${socialUsername}`,
-        `Colors: ${selectedColors || "Not specified"}`,
-        uploadedFilesCount
-          ? `Reference Images: ${uploadedFilesCount} files`
-          : "",
-        comments
-          ? `Notes: ${comments.substring(0, 80)}${
-              comments.length > 80 ? "..." : ""
-            }`
-          : "",
-      ]
-        .filter(Boolean)
-        .join(" | ");
+      // Create line items for each cart item
+      const lineItems = cartItems.map((item) => ({
+        price_data: {
+          currency: "eur",
+          product_data: {
+            name: item.service.name,
+            description: `Quantity: ${item.quantity}`,
+            images: ["https://karatedesignscn.com/logo.png"],
+          },
+          unit_amount: item.service.price, // Already in cents
+        },
+        quantity: item.quantity,
+      }));
+
+      // Calculate total
+      const total = cartItems.reduce(
+        (sum, item) => sum + item.service.price * item.quantity,
+        0
+      );
+
+      // Prepare metadata for each item (optimized to stay under 50 keys)
+      const itemMetadata = {};
+      cartItems.forEach((item, index) => {
+        const prefix = `item_${index}`;
+        itemMetadata[`${prefix}_serviceId`] = item.service.id;
+        itemMetadata[`${prefix}_quantity`] = item.quantity.toString();
+
+        // Handle design preferences for each item section (when quantity > 1)
+        for (let i = 0; i < item.quantity; i++) {
+          const sectionPrefix = `${prefix}_section_${i}`;
+          itemMetadata[`${sectionPrefix}_colorScheme`] =
+            item.designPreferences?.[`colorScheme_${i}`] || "";
+          itemMetadata[`${sectionPrefix}_customColor1`] =
+            item.designPreferences?.[`customColor1_${i}`] || "";
+          itemMetadata[`${sectionPrefix}_customColor2`] =
+            item.designPreferences?.[`customColor2_${i}`] || "";
+          itemMetadata[`${sectionPrefix}_comments`] =
+            item.designPreferences?.[`comments_${i}`] || "";
+        }
+
+        // Handle uploaded files (optimized to stay under 50 keys)
+        if (item.uploadedFiles && item.uploadedFiles.length > 0) {
+          const maxFilesPerSection = 5;
+          const maxTotalFiles = maxFilesPerSection * item.quantity;
+          const maxFiles = Math.min(item.uploadedFiles.length, maxTotalFiles);
+          itemMetadata[`${prefix}_filesCount`] = maxFiles.toString();
+
+          // Store file URLs in metadata (optimized format to reduce keys)
+          item.uploadedFiles.slice(0, maxFiles).forEach((file, fileIndex) => {
+            // Combine file info into a single key to reduce metadata keys
+            const fileInfo = {
+              url: file.url || file,
+              name: file.name || `File ${fileIndex + 1}`,
+              type: file.type || "unknown",
+              sectionIndex: file.sectionIndex?.toString() || "0",
+            };
+            itemMetadata[`${prefix}_file${fileIndex}`] =
+              JSON.stringify(fileInfo);
+          });
+        } else {
+          itemMetadata[`${prefix}_filesCount`] = "0";
+        }
+      });
+
+      // Check metadata key count and warn if approaching limit
+      const metadataKeys = Object.keys({
+        customerName: customerInfo.name,
+        socialPlatform: customerInfo.socialPlatform,
+        socialUsername: customerInfo.socialUsername,
+        totalItems: cartItems.length.toString(),
+        totalAmount: total.toString(),
+        ...itemMetadata,
+      });
+
+      if (metadataKeys.length > 45) {
+        console.warn(
+          `Warning: Metadata has ${metadataKeys.length} keys (limit is 50)`
+        );
+      }
+
+      // Determine the correct domain for success/cancel URLs
+      const getDomain = () => {
+        // Get the host from the request headers
+        const host = req.headers.host;
+
+        // Check if we're in development (localhost)
+        if (host && host.includes("localhost")) {
+          return `http://${host}`;
+        }
+
+        // Check if we're in development environment
+        if (process.env.NODE_ENV === "development") {
+          return "http://localhost:3000";
+        }
+
+        // Use environment variable or default to production domain
+        return process.env.NEXT_PUBLIC_DOMAIN || "https://karatedesignscn.com";
+      };
+
+      const domain = getDomain();
 
       // Create Stripe checkout session
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
-        line_items: [
-          {
-            price_data: {
-              currency: "eur",
-              product_data: {
-                name: serviceConfig.name,
-                description: orderDescription,
-                images: ["https://karatedesignscn.com/logo.png"], // Your logo
-              },
-              unit_amount: finalPrice, // Amount in cents
-            },
-            quantity: 1,
-          },
-        ],
+        line_items: lineItems,
         mode: "payment",
-        success_url: `${
-          process.env.NEXT_PUBLIC_DOMAIN || "https://karatedesignscn.com"
-        }/order-success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${
-          process.env.NEXT_PUBLIC_DOMAIN || "https://karatedesignscn.com"
-        }/order?cancelled=true`,
-        customer_email: email,
+        success_url: `${domain}/order-success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${domain}/checkout?cancelled=true`,
+        customer_email: customerInfo.email,
         metadata: {
-          customerName: name,
-          socialPlatform: socialPlatform,
-          socialUsername: socialUsername,
-          selectedColors: selectedColors || "Not specified",
-          comments: comments
-            ? comments.substring(0, 100)
-            : "No additional comments",
-          serviceType: serviceType,
-          uploadedFilesCount: uploadedFilesCount || 0,
-          // Store URLs across multiple metadata fields to handle long URLs
-          ...(uploadedFileUrls && uploadedFileUrls.length > 0
-            ? (() => {
-                const urls = uploadedFileUrls
-                  .map((file) => (typeof file === "string" ? file : file.url))
-                  .filter((url) => url);
-
-                const urlFields = {};
-                urls.forEach((url, index) => {
-                  urlFields[`uploadedFileUrl${index + 1}`] = url;
-                });
-
-                return urlFields;
-              })()
-            : {}),
+          customerName: customerInfo.name,
+          socialPlatform: customerInfo.socialPlatform,
+          socialUsername: customerInfo.socialUsername,
+          totalItems: cartItems.length.toString(),
+          totalAmount: total.toString(),
+          ...itemMetadata,
         },
         // Collect shipping address if needed for physical deliverables
         shipping_address_collection: {

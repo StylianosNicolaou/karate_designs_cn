@@ -2,11 +2,17 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  XMarkIcon,
+  ShoppingCartIcon,
+} from "@heroicons/react/24/outline";
+import { useCart } from "./CartProvider";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { itemCount, isEmpty } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -76,6 +82,20 @@ export default function Navbar() {
             className="text-white hover:text-primary transition"
           >
             Contact
+          </a>
+          <a
+            href="/checkout"
+            className={`relative text-white hover:text-primary transition p-2 rounded-md hover:bg-white/10 ${
+              !isEmpty ? "text-primary" : ""
+            }`}
+            aria-label={`Cart (${itemCount} items)`}
+          >
+            <ShoppingCartIcon className="w-6 h-6" />
+            {!isEmpty && (
+              <span className="absolute -top-2 -right-2 bg-primary text-white rounded-full w-5 h-5 text-xs flex items-center justify-center font-bold">
+                {itemCount > 99 ? "99+" : itemCount}
+              </span>
+            )}
           </a>
           <a
             href="/order"
@@ -170,6 +190,20 @@ export default function Navbar() {
                     className="block text-white text-lg font-medium hover:text-primary transition py-2"
                   >
                     Contact
+                  </a>
+                  <a
+                    href="/checkout"
+                    onClick={closeMobileMenu}
+                    className={`block text-white text-lg font-medium hover:text-primary transition py-2 flex items-center justify-between ${
+                      !isEmpty ? "text-primary" : ""
+                    }`}
+                  >
+                    <span>Cart</span>
+                    {!isEmpty && (
+                      <span className="bg-primary text-white rounded-full w-6 h-6 text-xs flex items-center justify-center font-bold">
+                        {itemCount > 99 ? "99+" : itemCount}
+                      </span>
+                    )}
                   </a>
                   <a
                     href="/order"

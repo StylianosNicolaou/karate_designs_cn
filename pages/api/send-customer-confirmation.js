@@ -8,16 +8,8 @@ export default async function handler(req, res) {
 
   try {
     const { orderData, sessionId } = req.body;
-    const {
-      customerEmail,
-      socialPlatform,
-      socialUsername,
-      serviceType,
-      selectedColors,
-      comments,
-      uploadedFilesCount,
-      uploadedFileUrls,
-    } = orderData;
+    const { customerEmail, socialPlatform, socialUsername, cartItems } =
+      orderData;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -27,34 +19,110 @@ export default async function handler(req, res) {
       },
     });
 
-    // Ensure uploadedFileUrls is always an array of strings
-    const fileUrls = Array.isArray(uploadedFileUrls)
-      ? uploadedFileUrls
-      : typeof uploadedFileUrls === "string" && uploadedFileUrls.trim()
-      ? uploadedFileUrls
-          .split(",")
-          .map((url) => url.trim())
-          .filter((url) => url && url !== "undefined" && url !== "null")
-      : [];
+    // Generate order details from cart items
+    const orderDetailsHtml =
+      cartItems
+        ?.map((item) => {
+          const serviceName =
+            item.serviceName ||
+            item.serviceId
+              ?.replace(/-/g, " ")
+              .replace(/\b\w/g, (l) => l.toUpperCase()) ||
+            "Unknown Service";
+          const totalFiles = item.uploadedFiles?.length || 0;
 
+          // Generate design preferences for each section
+          const sectionsHtml = [];
+          for (let i = 0; i < item.quantity; i++) {
+            const colorScheme =
+              item.designPreferences?.[`colorScheme_${i}`] || "Not specified";
+            const comments =
+              item.designPreferences?.[`comments_${i}`] ||
+              "No additional comments";
+            const customColor1 =
+              item.designPreferences?.[`customColor1_${i}`] || "";
+            const customColor2 =
+              item.designPreferences?.[`customColor2_${i}`] || "";
+
+            // Get files for this specific section
+            const sectionFiles =
+              item.uploadedFiles?.filter((file) => file.sectionIndex === i) ||
+              [];
+            const filesHtml =
+              sectionFiles.length > 0
+                ? `<p><strong>Reference Files (${
+                    sectionFiles.length
+                  }):</strong></p>
+                 <ul style="margin: 10px 0; padding-left: 20px;">
+                   ${sectionFiles
+                     .map(
+                       (file) =>
+                         `<li><a href="${
+                           file.url
+                         }" target="_blank" style="color: #dc2626; text-decoration: none;">${
+                           file.name || "View File"
+                         }</a></li>`
+                     )
+                     .join("")}
+                 </ul>`
+                : "";
+
+            sectionsHtml.push(`
+          <div style="margin-bottom: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
+            <h4 style="color: #333; margin-top: 0;">${serviceName} #${
+              i + 1
+            }:</h4>
+            <p><strong>Color Scheme:</strong> ${colorScheme}</p>
+            ${
+              customColor1 && customColor2
+                ? `<p><strong>Custom Colors:</strong> ${customColor1}, ${customColor2}</p>`
+                : ""
+            }
+            <p><strong>Comments:</strong> ${comments}</p>
+            ${filesHtml}
+          </div>
+        `);
+          }
+
+          return `
+        <div style="margin-bottom: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
+          <h3 style="color: #333; margin-top: 0;">${serviceName} (Quantity: ${
+            item.quantity
+          })</h3>
+          ${sectionsHtml.join("")}
+          <p><strong>Reference Files:</strong> ${totalFiles} file${
+            totalFiles !== 1 ? "s" : ""
+          }</p>
+        </div>
+      `;
+        })
+        .join("") || "<p>No order details available.</p>";
+
+    // Generate file links HTML
+    const allFiles =
+      cartItems?.flatMap((item) => item.uploadedFiles || []) || [];
     const fileLinksHtml =
-      fileUrls.length > 0
+      allFiles.length > 0
         ? `
-        <h3 style="color: #333; margin-bottom: 15px;">Your Reference Images (${
-          uploadedFilesCount || fileUrls.length
+        <h3 style="color: #333; margin-bottom: 15px;">Your Reference Files (${
+          allFiles.length
         } files):</h3>
         <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-          ${fileUrls
+          ${allFiles
             .map(
-              (url, index) => `
+              (file, index) => `
             <div style="margin-bottom: 15px; padding: 10px; background-color: white; border-radius: 3px;">
-              <strong style="color: #333;">Image ${index + 1}</strong><br><br>
+              <strong style="color: #333;">File ${index + 1}: ${
+                file.name || `File ${index + 1}`
+              }</strong><br><br>
               <p style="margin: 10px 0;">
-                <a href="${url}" style="color: #dc2626; font-weight: bold; font-size: 16px;">📸 VIEW YOUR UPLOADED IMAGE</a>
+                <a href="${
+                  file.url
+                }" style="color: #dc2626; font-weight: bold; font-size: 16px;">📸 VIEW YOUR UPLOADED FILE</a>
               </p>
               <p style="margin: 5px 0; font-size: 12px; color: #666;">
                 Copy this URL if the link above doesn't work:<br>
-                ${url}
+                ${file.url}
               </p>
             </div>
           `
@@ -62,7 +130,7 @@ export default async function handler(req, res) {
             .join("")}
         </div>
       `
-        : "<p>No reference images were uploaded with this order.</p>";
+        : "<p>No reference files were uploaded with this order.</p>";
 
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -79,20 +147,14 @@ export default async function handler(req, res) {
           <h3 style="color: #333; margin-top: 0;">Order Details:</h3>
           <table style="width: 100%; border-collapse: collapse;">
             <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Order ID:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${sessionId}</td></tr>
-            <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Service:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${serviceType}</td></tr>
-            <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Color Scheme:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${selectedColors}</td></tr>
             <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Social Media:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee;">${socialPlatform} - ${socialUsername}</td></tr>
-            <tr><td style="padding: 8px 0;"><strong>Reference Images:</strong></td><td style="padding: 8px 0;">${
-              uploadedFilesCount || fileUrls.length
-            } files</td></tr>
+            <tr><td style="padding: 8px 0;"><strong>Total Files:</strong></td><td style="padding: 8px 0;">${allFiles.length} files</td></tr>
           </table>
         </div>
 
         <div style="background-color: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107; margin: 20px 0;">
-          <h3 style="color: #333; margin-top: 0;">Your Requirements:</h3>
-          <p style="margin: 0; color: #333;">${
-            comments || "No additional requirements specified"
-          }</p>
+          <h3 style="color: #333; margin-top: 0;">Your Order Items:</h3>
+          ${orderDetailsHtml}
         </div>
 
         ${fileLinksHtml}
@@ -125,7 +187,7 @@ export default async function handler(req, res) {
     await transporter.sendMail({
       from: process.env.NOTIFICATION_EMAIL_USER,
       to: customerEmail,
-      subject: `🥋 Order Confirmation - ${serviceType} | Karate Designs CN`,
+      subject: `🥋 Order Confirmation - Karate Designs CN`,
       html: emailHtml,
       text: `
 🥋 Order Confirmation - Karate Designs CN
@@ -134,19 +196,34 @@ export default async function handler(req, res) {
 
 Order Details:
 - Order ID: ${sessionId}
-- Service: ${serviceType}
-- Color Scheme: ${selectedColors}
 - Social Media: ${socialPlatform} - ${socialUsername}
-- Reference Images: ${uploadedFilesCount || fileUrls.length} files
+- Total Files: ${allFiles.length} files
 
-Your Requirements:
-${comments || "No additional requirements specified"}
+Your Order Items:
+${
+  cartItems
+    ?.map((item) => {
+      const serviceName =
+        item.serviceName ||
+        item.serviceId
+          ?.replace(/-/g, " ")
+          .replace(/\b\w/g, (l) => l.toUpperCase()) ||
+        "Unknown Service";
+      return `${serviceName} (Quantity: ${item.quantity})`;
+    })
+    .join("\n") || "No order details available"
+}
 
 ${
-  fileUrls.length > 0
-    ? `Your Reference Images (${uploadedFilesCount || fileUrls.length} files):
-${fileUrls.map((url, index) => `Image ${index + 1}: ${url}`).join("\n")}`
-    : "No reference images were uploaded with this order."
+  allFiles.length > 0
+    ? `Your Reference Files (${allFiles.length} files):
+${allFiles
+  .map(
+    (file, index) =>
+      `File ${index + 1}: ${file.name || `File ${index + 1}`} - ${file.url}`
+  )
+  .join("\n")}`
+    : "No reference files were uploaded with this order."
 }
 
 📞 What's Next?
