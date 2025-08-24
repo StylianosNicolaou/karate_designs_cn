@@ -151,14 +151,9 @@ const nextConfig = {
     ];
   },
 
-  // Rewrites for clean URLs
+  // Rewrites for clean URLs (removed sitemap rewrite since we have direct file)
   async rewrites() {
-    return [
-      {
-        source: "/sitemap.xml",
-        destination: "/api/sitemap",
-      },
-    ];
+    return [];
   },
 
   // Enable experimental features for better performance

@@ -54,11 +54,11 @@ export default async function handler(req, res) {
   // Helper function to escape XML content
   const escapeXml = (text) => {
     return text
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&apos;');
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&apos;");
   };
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
