@@ -9,10 +9,10 @@ export default function Hero() {
   const [text] = useTypewriter({
     words: [
       "@karate_designs.cn",
-      "Designing with Discipline.",
-      "Creating with Purpose.",
-      "Crafting with Precision.",
-      "Innovation with Intention.",
+      "#1 Martial Arts Design Studio",
+      "Trusted by 600+ Athletes & Dojos Worldwide",
+      "Designs That Stand Out",
+      "Helping Dojos Grow with Powerful Design",
     ],
     loop: 0,
     delaySpeed: 2000,
@@ -54,7 +54,10 @@ export default function Hero() {
         }}
       />
       <motion.h1
-        className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 text-white leading-tight z-10"
+        className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 text-white leading-tight z-10 drop-shadow-2xl"
+        style={{
+          textShadow: "2px 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.5)",
+        }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
