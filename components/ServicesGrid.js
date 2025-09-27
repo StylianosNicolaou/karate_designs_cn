@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaTshirt,
-  FaInstagram,
   FaFlag,
   FaPaintBrush,
   FaCertificate,
@@ -9,6 +8,7 @@ import {
   FaChevronDown,
   FaChevronUp,
   FaCarSide,
+  FaLaptopCode,
 } from "react-icons/fa";
 import { useState, useRef } from "react";
 
@@ -30,16 +30,6 @@ const categories = [
       {
         title: "Seminar Poster",
         desc: "Professional posters for seminars and workshops.",
-        price: "€80",
-      },
-      {
-        title: "Athlete Highlight Poster",
-        desc: "Spotlight athletes with striking visual flair.",
-        price: "€70",
-      },
-      {
-        title: "Training Camp Poster",
-        desc: "Promote camps with clear, branded visuals.",
         price: "€80",
       },
       {
@@ -68,42 +58,6 @@ const categories = [
         desc: "Eye-catching banners for competitive events.",
         price: "€120",
       },
-      {
-        title: "Roll-Up Banner",
-        desc: "Portable banners ideal for quick setup.",
-        price: "€110",
-      },
-      {
-        title: "Social Media Banner (FB/Twitter/YouTube)",
-        desc: "Banners optimized for social media platforms.",
-        price: "€60",
-      },
-    ],
-  },
-  {
-    icon: <FaInstagram className="text-primary text-xl" />,
-    title: "Social Media Graphics",
-    items: [
-      {
-        title: "Instagram Post Pack (5 posts)",
-        desc: "Set of 5 styled Instagram posts.",
-        price: "€70",
-      },
-      {
-        title: "Instagram Story Pack (5 stories)",
-        desc: "Set of 5 Instagram story templates.",
-        price: "€60",
-      },
-      {
-        title: "Facebook/Instagram Ad Design",
-        desc: "Optimized ad designs for social media.",
-        price: "€40",
-      },
-      {
-        title: "Athlete/Dojo Social Pack (10 posts + 5 stories)",
-        desc: "Complete social media package for athletes and dojos.",
-        price: "€120",
-      },
     ],
   },
   {
@@ -125,21 +79,11 @@ const categories = [
         desc: "Logos that capture your personal ethos.",
         price: "€120",
       },
-      {
-        title: "Mascot Logo for Teams",
-        desc: "Fun and fierce mascot designs for teams.",
-        price: "€160",
-      },
-      {
-        title: "Minimal/Modern Logo (general use)",
-        desc: "Clean, modern logos for general use.",
-        price: "€110",
-      },
     ],
   },
   {
     icon: <FaTshirt className="text-primary text-xl" />,
-    title: "Merch & Apparel Design",
+    title: "Merch Design",
     items: [
       {
         title: "T-Shirt Design",
@@ -156,11 +100,6 @@ const categories = [
         desc: "Patches for uniforms and dojo branding.",
         price: "€50",
       },
-      {
-        title: "Merchandise Pack (T-shirt + Hoodie + Patch)",
-        desc: "Complete merchandise design package.",
-        price: "€150",
-      },
     ],
   },
   {
@@ -173,24 +112,14 @@ const categories = [
         price: "€50",
       },
       {
-        title: "Medal/Ribbon Design",
-        desc: "Designs for competition medals and ribbons.",
+        title: "Medal Design",
+        desc: "Designs for competition medals.",
         price: "€60",
-      },
-      {
-        title: "Ticket/Pass Design",
-        desc: "Event tickets and passes.",
-        price: "€40",
       },
       {
         title: "Business Card Design",
         desc: "Professional business cards.",
         price: "€40",
-      },
-      {
-        title: "Flyer/Leaflet (single side)",
-        desc: "Single-sided promotional flyers.",
-        price: "€50",
       },
       {
         title: "Flyer/Leaflet (double side)",
@@ -201,22 +130,17 @@ const categories = [
   },
   {
     icon: <FaCarSide className="text-primary text-xl" />,
-    title: "Digital & Video Graphics",
+    title: "Video Graphics",
     items: [
       {
-        title: "Motion Poster / Animated Social Ad",
-        desc: "Animated posters and social media ads.",
-        price: "€90",
+        title: "Video Edit",
+        desc: "Professional video edit.",
+        price: "€80",
       },
       {
-        title: "Video Intro/Outro",
-        desc: "Professional video intro and outro graphics.",
+        title: "Tournament Promo Video",
+        desc: "Promotional videos for tournaments.",
         price: "€120",
-      },
-      {
-        title: "Tournament Promo Video (short edit)",
-        desc: "Short promotional videos for tournaments.",
-        price: "€150",
       },
     ],
   },
@@ -225,34 +149,40 @@ const categories = [
     title: "Package Deals",
     items: [
       {
-        title: "Event Branding Package",
-        desc: "Complete branding package for events.",
-        price: "€220",
+        title: "Dojo Basic Package",
+        desc: "Complete basic package for new dojos.",
+        price: "€250",
       },
       {
-        title: "Dojo Starter Pack",
-        desc: "Complete starter package for new dojos.",
-        price: "€300",
-      },
-      {
-        title: "Athlete Highlight Pack",
-        desc: "Package for athlete self-branding.",
-        price: "€150",
-      },
-      {
-        title: "Tournament Promo Pack",
-        desc: "Complete tournament promotion package.",
+        title: "Dojo Standard Package",
+        desc: "Complete standard package for established dojos.",
         price: "€350",
       },
       {
-        title: "Social Media Growth Pack",
-        desc: "Comprehensive social media package.",
-        price: "€200",
+        title: "Dojo Premium Package",
+        desc: "Complete premium package for established dojos.",
+        price: "€550",
+      },
+    ],
+  },
+  {
+    icon: <FaLaptopCode className="text-primary text-xl" />,
+    title: "Website Design & Creation",
+    items: [
+      {
+        title: "Website Design",
+        desc: "Professional website design mockups and wireframes. Complete visual design only.",
+        price: "€700",
       },
       {
-        title: "Complete Dojo Identity Pack",
-        desc: "Full dojo identity and branding package.",
-        price: "€500",
+        title: "Website Creation",
+        desc: "Implement and develop a website from your existing design. Full coding and deployment.",
+        price: "€1,000",
+      },
+      {
+        title: "Full Website Design & Creation",
+        desc: "Complete website solution from design to deployment. Save €200 with this package!",
+        price: "€1,500",
       },
     ],
   },

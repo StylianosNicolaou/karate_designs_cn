@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -15,12 +15,12 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Branding */}
         <div className="text-sm tracking-wide font-medium">
-          &copy; {year}{" "}Karate Designs CN. All rights reserved. 
-          Powered by <a
-            href="mailto:stylianosnicolaou@gmail.com"
+          &copy; {year} Karate Designs CN. All rights reserved. Powered by{" "}
+          <a
+            href="https://ace-portfolio-theta.vercel.app/"
             className="text-primary hover:text-primary/80 transition"
           >
-            Stylianos Nicolaou
+            ACE
           </a>
         </div>
 
@@ -44,12 +44,12 @@ export default function Footer() {
           </a>
 
           <a
-            href="https://x.com/karate_designs"
+            href="https://www.tiktok.com/@karate_designs.cn"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-primary transition"
           >
-            <FaTwitter />
+            <FaTiktok />
           </a>
         </div>
       </div>
