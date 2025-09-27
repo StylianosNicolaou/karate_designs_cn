@@ -66,19 +66,19 @@ export default function Navbar() {
 
         <div className="items-center space-x-4 hidden md:flex">
           <a
-            href="#gallery"
+            href="/#gallery"
             className="text-white hover:text-primary transition"
           >
             Gallery
           </a>
           <a
-            href="#packages"
+            href="/#packages"
             className="text-white hover:text-primary transition"
           >
             Packages
           </a>
           <a
-            href="#contact"
+            href="/#contact"
             className="text-white hover:text-primary transition"
           >
             Contact
@@ -171,21 +171,21 @@ export default function Navbar() {
                 {/* Links */}
                 <div className="flex-1 px-6 py-8 space-y-6">
                   <a
-                    href="#gallery"
+                    href="/#gallery"
                     onClick={closeMobileMenu}
                     className="block text-white text-lg font-medium hover:text-primary transition py-2"
                   >
                     Gallery
                   </a>
                   <a
-                    href="#packages"
+                    href="/#packages"
                     onClick={closeMobileMenu}
                     className="block text-white text-lg font-medium hover:text-primary transition py-2"
                   >
                     Packages
                   </a>
                   <a
-                    href="#contact"
+                    href="/#contact"
                     onClick={closeMobileMenu}
                     className="block text-white text-lg font-medium hover:text-primary transition py-2"
                   >
@@ -194,7 +194,7 @@ export default function Navbar() {
                   <a
                     href="/checkout"
                     onClick={closeMobileMenu}
-                    className={`block text-white text-lg font-medium hover:text-primary transition py-2 flex items-center justify-between ${
+                    className={`text-white text-lg font-medium hover:text-primary transition py-2 flex items-center justify-between ${
                       !isEmpty ? "text-primary" : ""
                     }`}
                   >
