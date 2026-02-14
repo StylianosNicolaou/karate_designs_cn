@@ -16,7 +16,7 @@ export default function Loader() {
     <AnimatePresence>
       {showLoader && (
         <motion.div
-          className="fixed inset-0 z-50 bg-transparent flex flex-col items-center justify-center gap-6 px-6"
+          className="fixed inset-0 z-50 bg-charcoal flex flex-col items-center justify-center gap-6 px-6"
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
