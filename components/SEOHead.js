@@ -30,8 +30,8 @@ export default function SEOHead({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         {/* Additional SEO Meta Tags */}
-        <meta name="theme-color" content="#1d1d1d" />
-        <meta name="msapplication-TileColor" content="#1d1d1d" />
+        <meta name="theme-color" content="#0E0E12" />
+        <meta name="msapplication-TileColor" content="#0E0E12" />
         <meta name="application-name" content={siteName} />
         <meta name="apple-mobile-web-app-title" content={siteName} />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -44,20 +44,8 @@ export default function SEOHead({
         <link rel="canonical" href={url} />
 
         {/* Favicon */}
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon-64x64.png" />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-64x64.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-64x64.png"
-        />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content={type} />

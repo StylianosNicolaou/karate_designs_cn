@@ -22,13 +22,13 @@ export default function Contact() {
         "service_oa9302r",
         "template_9sttg0c",
         data,
-        "l_z94iROq-YLPK4vV"
+        "l_z94iROq-YLPK4vV",
       );
       await emailjs.send(
         "service_oa9302r",
         "template_o4gz7co",
         data,
-        "l_z94iROq-YLPK4vV"
+        "l_z94iROq-YLPK4vV",
       );
 
       setSubmitted(true);
@@ -137,15 +137,13 @@ export default function Contact() {
           disabled={isSubmitting}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className={`bg-primary text-white px-6 py-3 rounded-md font-medium tracking-wide transition ${
-            isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-          }`}
+          className={`btn-liquid-glass ${isSubmitting ? "opacity-60 cursor-not-allowed" : ""}`}
         >
           {isSubmitting
             ? "Sending..."
             : isSubmitSuccessful && submitted
-            ? "Sent ✓"
-            : "Send Message"}
+              ? "Sent ✓"
+              : "Send Message"}
         </motion.button>
       </motion.form>
     </section>

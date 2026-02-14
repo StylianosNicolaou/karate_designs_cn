@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { useRef } from "react";
+import LiquidGlassButton from "./LiquidGlassButton";
 
 export default function Hero() {
   const ref = useRef(null);
@@ -41,7 +42,7 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{ objectPosition: "center" }}
       >
-        <source src="/videos/hero-animation3.mp4" type="video/mp4" />
+        <source src="/videos/hero-animation4.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -50,11 +51,11 @@ export default function Hero() {
         className="absolute inset-0 z-10 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(29,29,29,0) 85%, #1d1d1d 98%)",
+            "linear-gradient(to bottom, rgba(14,14,18,0) 70%, #0E0E12 95%)",
         }}
       />
       <motion.h1
-        className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 text-white leading-tight z-10 drop-shadow-2xl"
+        className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-4 text-white leading-tight z-10 drop-shadow-2xl w-full flex justify-center"
         style={{
           textShadow: "2px 2px 4px rgba(0,0,0,0.8), 0 0 8px rgba(0,0,0,0.5)",
         }}
@@ -63,8 +64,25 @@ export default function Hero() {
         transition={{ duration: 1 }}
       >
         {text}
-        <Cursor cursorStyle="|" cursorColor="#e63946" />
+        <Cursor cursorStyle="|" cursorColor="#5A35E6" />
       </motion.h1>
+
+      {/* CTA fixed at bottom of hero — does not affect animated text position */}
+      <motion.div
+        className="absolute bottom-20 left-0 right-0 z-10 flex justify-center pb-8 sm:pb-10"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1, duration: 0.5 }}
+      >
+        <LiquidGlassButton
+          as="a"
+          href="/order"
+          size="lg"
+          className="!px-10 !py-3 min-w-[280px] sm:min-w-[320px]"
+        >
+          Explore our services
+        </LiquidGlassButton>
+      </motion.div>
 
       {/* <motion.p
         className="text-sm sm:text-m py-2 text-gray-200 mt-6 italic z-10"
@@ -76,7 +94,7 @@ export default function Hero() {
       </motion.p>
       <motion.a
         href="#gallery"
-        className="inline-block mt-4 px-6 py-3 bg-primary text-white text-base font-medium rounded-md shadow-md hover:shadow-lg hover:-translate-y-1 transition transform z-10"
+        className="inline-block mt-4 btn-liquid-glass"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         initial={{ opacity: 0, y: 10 }}

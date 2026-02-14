@@ -128,7 +128,7 @@ export default function OrderSuccess() {
         .catch((err) => {
           console.error("Failed to fetch session:", err);
           setError(
-            "We encountered an issue verifying your payment. Please contact us directly with your order details."
+            "We encountered an issue verifying your payment. Please contact us directly with your order details.",
           );
           setLoading(false);
         });
@@ -147,7 +147,8 @@ export default function OrderSuccess() {
       <Head>
         <title>Order Confirmation - Karate Designs CN</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon-64x64.png" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
       <main className="min-h-screen pt-24 pb-12">
@@ -168,10 +169,7 @@ export default function OrderSuccess() {
                 Payment Verification Failed
               </h1>
               <p className="text-gray-300 mb-8">{error}</p>
-              <Link
-                href="/order"
-                className="bg-primary text-white px-8 py-3 rounded-md font-semibold hover:bg-primary/90 transition-all"
-              >
+              <Link href="/order" className="btn-liquid-glass">
                 Try Again
               </Link>
             </motion.div>
@@ -380,12 +378,12 @@ export default function OrderSuccess() {
                                     ? `${item.serviceId
                                         .replace(/-/g, " ")
                                         .replace(/\b\w/g, (l) =>
-                                          l.toUpperCase()
+                                          l.toUpperCase(),
                                         )} #${sectionNumber}`
                                     : item.serviceId
                                         .replace(/-/g, " ")
                                         .replace(/\b\w/g, (l) =>
-                                          l.toUpperCase()
+                                          l.toUpperCase(),
                                         );
 
                                 return (
@@ -448,7 +446,7 @@ export default function OrderSuccess() {
                                     )}
                                   </div>
                                 );
-                              }
+                              },
                             )}
                             {item.filesCount > 0 && (
                               <p className="text-gray-300 text-xs sm:text-sm">
@@ -528,7 +526,7 @@ export default function OrderSuccess() {
                     console.log("Navigating to /order");
                     window.location.href = "/order";
                   }}
-                  className="bg-primary text-white px-6 sm:px-8 py-3 rounded-md font-semibold hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/30 text-sm sm:text-base text-center"
+                  className="btn-liquid-glass text-sm sm:text-base text-center"
                 >
                   Order More Designs
                 </button>
@@ -562,7 +560,7 @@ export default function OrderSuccess() {
                   console.log("Navigating to /order from error state");
                   window.location.href = "/order";
                 }}
-                className="bg-primary text-white px-6 sm:px-8 py-3 rounded-md font-semibold hover:bg-primary/90 transition-all text-sm sm:text-base"
+                className="btn-liquid-glass text-sm sm:text-base"
               >
                 Back to Orders
               </button>

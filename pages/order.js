@@ -138,7 +138,7 @@ export default function Order() {
                   onClick={handleProceedToCheckout}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="bg-primary text-white px-8 py-3 rounded-md font-semibold hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/30"
+                  className="btn-liquid-glass"
                 >
                   Proceed to Checkout →
                 </motion.button>
@@ -279,7 +279,7 @@ export default function Order() {
                               onClick={() =>
                                 handleQuantityChange(
                                   service.id,
-                                  (quantities[service.id] || 1) - 1
+                                  (quantities[service.id] || 1) - 1,
                                 )
                               }
                               className="w-8 h-8 rounded-md bg-white/10 text-white hover:bg-white/20 transition-colors flex items-center justify-center"
@@ -302,7 +302,7 @@ export default function Order() {
                               onClick={() =>
                                 handleQuantityChange(
                                   service.id,
-                                  (quantities[service.id] || 1) + 1
+                                  (quantities[service.id] || 1) + 1,
                                 )
                               }
                               className="w-8 h-8 rounded-md bg-white/10 text-white hover:bg-white/20 transition-colors flex items-center justify-center"
@@ -326,7 +326,7 @@ export default function Order() {
                           className={`w-full py-3 rounded-md font-semibold transition-all flex items-center justify-center space-x-2 ${
                             addingToCart[service.id]
                               ? "bg-green-600 text-white cursor-not-allowed"
-                              : "bg-primary text-white hover:bg-primary/90 shadow-lg hover:shadow-primary/30"
+                              : "btn-liquid-glass"
                           }`}
                         >
                           {addingToCart[service.id] ? (
@@ -391,7 +391,7 @@ export default function Order() {
                 onClick={handleProceedToCheckout}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-primary text-white px-12 py-4 rounded-md font-semibold text-lg hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/30"
+                className="btn-liquid-glass btn-xl"
               >
                 Continue to Checkout ({itemCount} items) →
               </motion.button>

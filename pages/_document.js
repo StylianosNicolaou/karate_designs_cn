@@ -25,6 +25,7 @@ export default function Document() {
         <meta name="twitter:card" content="summary_large_image" />
 
         {/* Favicon */}
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <body className="bg-charcoal text-white">

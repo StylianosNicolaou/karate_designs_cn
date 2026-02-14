@@ -8,6 +8,7 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
 import { useCart } from "./CartProvider";
+import LiquidGlassButton from "./LiquidGlassButton";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -47,9 +48,9 @@ export default function Navbar() {
       >
         <a href="/" className="flex items-center gap-3">
           <img
-            src="/logo.svg"
+            src="/karatedesignscn-logo.svg"
             alt="Karate Designs CN Logo"
-            className={`transition-all duration-300 ease-in-out invert brightness-0 ${
+            className={`transition-all duration-300 ease-in-out ${
               scrolled || mobileMenuOpen
                 ? "w-[36px] h-[36px] sm:w-[44px] sm:h-[44px]"
                 : "w-[72px] h-[72px] sm:w-[88px] sm:h-[88px]"
@@ -97,12 +98,9 @@ export default function Navbar() {
               </span>
             )}
           </a>
-          <a
-            href="/order"
-            className="bg-primary text-white px-4 py-2 rounded-md font-medium hover:bg-primary/90 transition-all hover:scale-105 shadow-lg hover:shadow-primary/30"
-          >
+          <LiquidGlassButton as="a" href="/order">
             Order now
-          </a>
+          </LiquidGlassButton>
         </div>
 
         {/* Mobile Menu Button */}
@@ -140,7 +138,7 @@ export default function Navbar() {
               role="dialog"
               aria-modal="true"
               className="fixed top-0 right-0 h-full w-80 max-w-sm z-[60] md:hidden border-l border-white/10
-                         bg-[#1d1d1d]" /* solid brand bg; no blur, no slashed opacity */
+                         bg-charcoal" /* solid brand bg; no blur, no slashed opacity */
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -151,9 +149,9 @@ export default function Navbar() {
                 <div className="flex items-center justify-between p-6 border-b border-white/10">
                   <div className="flex items-center gap-3">
                     <img
-                      src="/logo.svg"
+                      src="/karatedesignscn-logo.svg"
                       alt="Karate Designs CN Logo"
-                      className="w-8 h-8 invert brightness-0"
+                      className="w-8 h-8"
                     />
                     <span className="text-white text-sm font-medium">
                       @karate_designs.cn
@@ -205,13 +203,15 @@ export default function Navbar() {
                       </span>
                     )}
                   </a>
-                  <a
+                  <LiquidGlassButton
+                    as="a"
                     href="/order"
                     onClick={closeMobileMenu}
-                    className="block bg-primary text-white text-center px-6 py-4 rounded-md font-semibold text-lg hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/30 mt-8"
+                    className="block w-full text-center mt-8"
+                    size="lg"
                   >
                     Order now
-                  </a>
+                  </LiquidGlassButton>
                 </div>
 
                 {/* Footer */}

@@ -14,7 +14,7 @@ export default function BackToTop() {
   return visible ? (
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-5 right-5 bg-primary p-3 rounded-full shadow-lg hover:scale-110 transition"
+      className="fixed bottom-5 right-5 btn-liquid-glass btn-icon"
     >
       <ChevronUpIcon className="w-5 h-5 text-white" />
     </button>

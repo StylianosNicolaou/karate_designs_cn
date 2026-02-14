@@ -128,7 +128,7 @@ export default function Gallery() {
           href="https://www.instagram.com/karate_designs.cn/"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-primary text-white px-6 py-3 rounded-md font-semibold tracking-wide transition shadow-lg hover:shadow-red-500/30"
+          className="inline-block btn-liquid-glass"
         >
           See More on Instagram →
         </a>

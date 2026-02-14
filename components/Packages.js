@@ -97,7 +97,7 @@ export default function Packages() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="#contact"
-              className="inline-block bg-primary text-white px-5 py-2 rounded-md font-medium tracking-wide shadow hover:shadow-lg transition"
+              className="inline-block btn-liquid-glass"
             >
               Get Started
             </motion.a>

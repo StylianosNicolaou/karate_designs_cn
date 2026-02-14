@@ -49,12 +49,12 @@ export default function Checkout() {
     // Check file sizes (15MB limit)
     const maxSize = 15 * 1024 * 1024; // 15MB
     const oversizedFiles = Array.from(files).filter(
-      (file) => file.size > maxSize
+      (file) => file.size > maxSize,
     );
 
     if (oversizedFiles.length > 0) {
       alert(
-        `Some files are too large. Maximum file size is 15MB. Please resize or compress your files.`
+        `Some files are too large. Maximum file size is 15MB. Please resize or compress your files.`,
       );
       return;
     }
@@ -63,13 +63,13 @@ export default function Checkout() {
     const currentItem = items.find((item) => item.id === itemId);
     const currentFiles =
       currentItem?.uploadedFiles?.filter(
-        (file) => file.sectionIndex === sectionIndex
+        (file) => file.sectionIndex === sectionIndex,
       ) || [];
     const totalFilesAfterUpload = currentFiles.length + files.length;
 
     if (totalFilesAfterUpload > 5) {
       alert(
-        `You can upload a maximum of 5 files per poster section. You currently have ${currentFiles.length} files and are trying to add ${files.length} more.`
+        `You can upload a maximum of 5 files per poster section. You currently have ${currentFiles.length} files and are trying to add ${files.length} more.`,
       );
       return;
     }
@@ -103,7 +103,7 @@ export default function Checkout() {
 
       // Create section-specific files array
       const sectionFiles = currentFiles.filter(
-        (file) => file.sectionIndex !== sectionIndex
+        (file) => file.sectionIndex !== sectionIndex,
       );
       const newFiles = [
         ...sectionFiles,
@@ -118,7 +118,7 @@ export default function Checkout() {
         itemId,
         "section:",
         sectionIndex,
-        newFiles
+        newFiles,
       );
 
       updateFiles(itemId, newFiles);
@@ -137,7 +137,7 @@ export default function Checkout() {
 
       // Reset file input for this specific section
       const fileInput = document.getElementById(
-        `file-upload-${itemId}-${sectionIndex}`
+        `file-upload-${itemId}-${sectionIndex}`,
       );
       if (fileInput) {
         fileInput.value = "";
@@ -233,7 +233,7 @@ export default function Checkout() {
     } catch (err) {
       console.error("Checkout submission error:", err);
       alert(
-        "There was an error processing your checkout. Please try again or contact us directly."
+        "There was an error processing your checkout. Please try again or contact us directly.",
       );
     } finally {
       setIsSubmitting(false);
@@ -250,7 +250,8 @@ export default function Checkout() {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <link rel="icon" href="/favicon-64x64.png" />
+          <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
         </Head>
         <Navbar />
         <main className="min-h-screen pt-24 pb-12 flex items-center justify-center">
@@ -269,7 +270,8 @@ export default function Checkout() {
       <Head>
         <title>Complete Your Order - Karate Designs CN</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon-64x64.png" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
       <main className="min-h-screen pt-24 pb-12">
@@ -720,7 +722,7 @@ export default function Checkout() {
                                 ) : uploadSuccess[`${item.id}-${i}`] ||
                                   (item.uploadedFiles &&
                                     item.uploadedFiles.filter(
-                                      (file) => file.sectionIndex === i
+                                      (file) => file.sectionIndex === i,
                                     ).length > 0) ? (
                                   <div className="space-y-3">
                                     <svg
@@ -743,12 +745,12 @@ export default function Checkout() {
                                           : `${
                                               item.uploadedFiles.filter(
                                                 (file) =>
-                                                  file.sectionIndex === i
+                                                  file.sectionIndex === i,
                                               ).length
                                             } file${
                                               item.uploadedFiles.filter(
                                                 (file) =>
-                                                  file.sectionIndex === i
+                                                  file.sectionIndex === i,
                                               ).length > 1
                                                 ? "s"
                                                 : ""
@@ -794,7 +796,7 @@ export default function Checkout() {
                             {(() => {
                               const sectionFiles =
                                 item.uploadedFiles?.filter(
-                                  (file) => file.sectionIndex === i
+                                  (file) => file.sectionIndex === i,
                                 ) || [];
                               return sectionFiles.length > 0 ? (
                                 <div className="space-y-2">
@@ -851,7 +853,7 @@ export default function Checkout() {
                                             handleRemoveFile(
                                               item.id,
                                               i,
-                                              fileIndex
+                                              fileIndex,
                                             )
                                           }
                                           className="text-red-400 hover:text-red-300 transition-colors p-1"
@@ -900,7 +902,7 @@ export default function Checkout() {
                           />
                         </div>
                       </div>
-                    </div>
+                    </div>,
                   );
                 }
 
@@ -946,12 +948,11 @@ export default function Checkout() {
                 disabled={isSubmitting}
                 whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className={`w-full bg-primary text-white px-8 py-4 rounded-md font-semibold text-lg transition-all shadow-lg hover:shadow-primary/30 flex items-center justify-center space-x-3
-                  ${
-                    isSubmitting
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:bg-primary/90"
-                  }`}
+                className={`w-full btn-liquid-glass btn-xl flex items-center justify-center space-x-3 ${
+                  isSubmitting ? "opacity-60 cursor-not-allowed" : ""
+                }`}
+                disabled={isSubmitting}
+                aria-disabled={isSubmitting}
               >
                 {isSubmitting ? (
                   <>
