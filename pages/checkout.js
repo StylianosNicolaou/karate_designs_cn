@@ -951,7 +951,6 @@ export default function Checkout() {
                 className={`w-full btn-liquid-glass btn-xl flex items-center justify-center space-x-3 ${
                   isSubmitting ? "opacity-60 cursor-not-allowed" : ""
                 }`}
-                disabled={isSubmitting}
                 aria-disabled={isSubmitting}
               >
                 {isSubmitting ? (
