@@ -1,11 +1,48 @@
 "use client";
 import { motion } from "framer-motion";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import LiquidGlassButton from "./LiquidGlassButton";
+
+const HERO_VIDEO_SRC = "/videos/hero-animation5.mp4";
 
 export default function Hero() {
   const ref = useRef(null);
+  const videoRef = useRef(null);
+  const [videoSrc, setVideoSrc] = useState(null);
+  const [isInView, setIsInView] = useState(true);
+
+  // Lazy-load video only when hero is in/near viewport; pause when off-screen
+  useEffect(() => {
+    const section = ref.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        const inView = entry.isIntersecting;
+        setIsInView(inView);
+
+        // Set src when first entering view (lazy load)
+        if (inView && !videoSrc) setVideoSrc(HERO_VIDEO_SRC);
+      },
+      { rootMargin: "50% 0px", threshold: 0 },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, [videoSrc]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isInView) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isInView]);
 
   const [text] = useTypewriter({
     words: [
@@ -33,16 +70,22 @@ export default function Hero() {
       //   backgroundPositionY: bgY,
       // }}
     >
-      {/* 🔥 Kling MP4 Background Video */}
+      {/* Hero background video: lazy-loaded, preload=metadata, pauses when off-screen */}
       <video
+        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
+        preload="metadata"
+        disablePictureInPicture
+        disableRemotePlayback
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{ objectPosition: "center" }}
+        aria-hidden
+        onCanPlay={() => videoRef.current?.play().catch(() => {})}
       >
-        <source src="/videos/hero-animation4.mp4" type="video/mp4" />
+        {videoSrc && <source src={videoSrc} type="video/mp4" />}
         Your browser does not support the video tag.
       </video>
 
