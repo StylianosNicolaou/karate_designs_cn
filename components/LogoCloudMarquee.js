@@ -3,19 +3,20 @@
 import Marquee from "react-fast-marquee";
 import { motion } from "framer-motion";
 
-// SVG logos from public/logos (1.svg through 23.svg)
-const LOGO_IDS = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23,
-];
+// SVG logos from public/logos (only files present in folder)
+const LOGO_IDS = [2, 4, 5, 6, 7, 8, 13, 20, 23];
 const DEFAULT_LOGO_SRCS = LOGO_IDS.map((id) => `/logos/${id}.svg`);
 
 export default function LogoCloudMarquee({
   logoSrcs = DEFAULT_LOGO_SRCS,
   title,
 }) {
-  // Duplicate so the marquee loops smoothly
-  const duplicated = [...logoSrcs, ...logoSrcs, ...logoSrcs];
+  const half = Math.ceil(logoSrcs.length / 2);
+  const topRow = logoSrcs.slice(0, half);
+  const bottomRow = logoSrcs.slice(half);
+  // Duplicate each row so the marquee loops smoothly
+  const topDuplicated = [...topRow, ...topRow, ...topRow];
+  const bottomDuplicated = [...bottomRow, ...bottomRow, ...bottomRow];
 
   const maskStyle = {
     maskImage:
@@ -37,36 +38,36 @@ export default function LogoCloudMarquee({
         </motion.h2>
       )}
 
-      {/* Top row — scrolls right */}
+      {/* Top row — first half of logos, scrolls right */}
       <div className="relative mb-6" style={maskStyle}>
         <Marquee speed={40} pauseOnHover gradient={false}>
-          {duplicated.map((src, i) => (
+          {topDuplicated.map((src, i) => (
             <div
               key={`top-${i}`}
-              className="flex-shrink-0 mr-6 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16"
+              className="flex-shrink-0 mr-14 flex items-center justify-center w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48"
             >
               <img
                 src={src}
                 alt=""
-                className="w-full h-full object-contain opacity-90 hover:opacity-100 "
+                className="w-full h-full object-contain opacity-90 hover:opacity-100"
               />
             </div>
           ))}
         </Marquee>
       </div>
 
-      {/* Bottom row — scrolls left, slightly slower */}
+      {/* Bottom row — second half of logos, scrolls left */}
       <div className="relative" style={maskStyle}>
         <Marquee speed={28} direction="left" pauseOnHover gradient={false}>
-          {duplicated.map((src, i) => (
+          {bottomDuplicated.map((src, i) => (
             <div
               key={`bottom-${i}`}
-              className="flex-shrink-0 mr-6 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16"
+              className="flex-shrink-0 mr-14 flex items-center justify-center w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48"
             >
               <img
                 src={src}
                 alt=""
-                className="w-full h-full object-contain opacity-90 hover:opacity-100 "
+                className="w-full h-full object-contain opacity-90 hover:opacity-100"
               />
             </div>
           ))}
