@@ -251,7 +251,7 @@ export default function Checkout() {
             content="width=device-width, initial-scale=1.0"
           />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.ico" />
         </Head>
         <Navbar />
         <main className="min-h-screen pt-24 pb-12 flex items-center justify-center">
@@ -932,7 +932,7 @@ export default function Checkout() {
                 </div>
                 <div className="flex justify-between text-gray-300">
                   <span>Delivery:</span>
-                  <span className="text-green-400">3-7 days</span>
+                  <span className="text-green-400">1-2 days</span>
                 </div>
                 <div className="border-t border-white/10 pt-4">
                   <div className="flex justify-between text-white font-bold text-xl">

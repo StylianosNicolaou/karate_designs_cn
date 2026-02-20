@@ -107,7 +107,7 @@ export default function Hero() {
         transition={{ duration: 1 }}
       >
         {text}
-        <Cursor cursorStyle="|" cursorColor="#5A35E6" />
+        <Cursor cursorStyle="|" cursorColor="#FF2E9A" />
       </motion.h1>
 
       {/* CTA fixed at bottom of hero — does not affect animated text position */}

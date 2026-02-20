@@ -40,17 +40,17 @@ export default function Navbar() {
     <>
       {/* NAV BAR */}
       <nav
-        className={`fixed w-full z-50 px-6 py-4 flex justify-between items-center transition duration-300 ${
+        className={`fixed w-full z-50 px-6 flex justify-between items-center transition duration-300 ${
           scrolled || mobileMenuOpen
-            ? "bg-charcoal/80 backdrop-blur-lg shadow-md"
-            : "bg-transparent"
+            ? "h-16 min-h-16 bg-charcoal/80 backdrop-blur-lg shadow-md"
+            : "py-4 bg-transparent"
         }`}
       >
-        <a href="/" className="flex items-center gap-3">
+        <a href="/" className="flex items-center gap-3 shrink-0">
           <img
             src="/karatedesignscn-logo.svg"
             alt="Karate Designs CN Logo"
-            className={`transition-all duration-300 ease-in-out ${
+            className={`block transition-all duration-300 ease-in-out ${
               scrolled || mobileMenuOpen
                 ? "w-[36px] h-[36px] sm:w-[44px] sm:h-[44px]"
                 : "w-[72px] h-[72px] sm:w-[88px] sm:h-[88px]"
@@ -65,7 +65,7 @@ export default function Navbar() {
           </span>
         </a>
 
-        <div className="items-center space-x-4 hidden md:flex">
+        <div className="hidden md:flex items-center space-x-4 shrink-0">
           <a
             href="/#gallery"
             className="text-white hover:text-primary transition"

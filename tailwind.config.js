@@ -11,9 +11,9 @@ module.exports = {
         charcoal: "#0E0E12", // Primary background (Charcoal Black)
         "bg-elevated": "#16161D", // Cards, sections, modals (Soft Graphite)
         "bg-subtle": "#1B1826", // Muted Violet Black
-        /* Primary brand – 20% violet */
-        primary: "#5A35E6", // Electric Brand Violet
-        /* Secondary accent – 8% magenta (hover, micro) */
+        /* Primary brand – magenta */
+        primary: "#FF2E9A", // Neon Magenta
+        /* Secondary accent */
         magenta: "#FF2E9A", // Neon Magenta
         /* Energy – 2% coral (high attention only) */
         coral: "#FF5A3C", // Coral Red
@@ -22,22 +22,22 @@ module.exports = {
         foreground: "#F2F2F7", // Soft White – body/headings
         secondary: "#A1A1B3", // Cool Gray – descriptions
         muted: "#6B6B80", // Slate Gray – captions
-        /* Violet scale */
+        /* Magenta scale (primary) */
         violet: {
-          50: "#F2EEFF",
-          100: "#D8CCFF",
-          500: "#5A35E6",
-          600: "#4A29C5",
-          700: "#3C20A6",
-          900: "#1E124D",
+          50: "#FFE5F4",
+          100: "#FFCCE9",
+          500: "#FF2E9A",
+          600: "#D91D82",
+          700: "#B3186A",
+          900: "#6B0E3D",
         },
       },
       backgroundImage: {
-        "gradient-brand": "linear-gradient(135deg, #5A35E6 0%, #FF2E9A 100%)",
+        "gradient-brand": "linear-gradient(135deg, #FF2E9A 0%, #FF5A3C 100%)",
         "gradient-hero":
-          "linear-gradient(135deg, #5A35E6 0%, #FF2E9A 50%, #FF5A3C 100%)",
+          "linear-gradient(135deg, #FF2E9A 0%, #FF2E9A 50%, #FF5A3C 100%)",
         "gradient-glow":
-          "radial-gradient(circle, rgba(90, 53, 230, 0.4) 0%, transparent 70%)",
+          "radial-gradient(circle, rgba(255, 46, 154, 0.4) 0%, transparent 70%)",
       },
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
