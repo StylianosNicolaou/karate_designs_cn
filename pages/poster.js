@@ -18,6 +18,7 @@ import { getServiceById } from "../lib/services";
 import LiquidGlassButton from "../components/LiquidGlassButton";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import LogoCloudMarquee from "../components/LogoCloudMarquee";
 
 const POSTER_SERVICE_ID = "poster-ads";
 
@@ -153,50 +154,8 @@ export default function PosterLandingPage() {
             </div>
           </section>
 
-          {/* 2. Trust & Social Proof */}
-          <section className="px-6 py-12 sm:py-16 border-t border-white/10">
-            <motion.h2
-              className="text-center text-xl sm:text-2xl font-semibold text-white mb-10"
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              Trusted by International Athletes & Dojos Worldwide
-            </motion.h2>
-            <motion.div
-              className="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-6 sm:gap-10"
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="px-6 py-3 bg-white/5 rounded-lg border border-white/10 text-white/90 text-sm sm:text-base font-medium text-center">
-                EKF EUROPEAN KARATE CHAMPIONSHIPS
-              </div>
-              <div className="px-6 py-3 bg-white/5 rounded-lg border border-white/10 text-white/90 text-sm sm:text-base font-medium text-center">
-                KARATE PREMIER LEAGUE
-              </div>
-              <div className="flex gap-3">
-                {[
-                  "/images/poster3.jpg",
-                  "/images/poster12.jpg",
-                  "/images/poster20.jpg",
-                ].map((src, i) => (
-                  <div
-                    key={i}
-                    className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-white/10 flex-shrink-0"
-                  >
-                    <Image
-                      src={src}
-                      alt=""
-                      fill
-                      sizes="80px"
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </section>
+          {/* 2. Trust & Social Proof — Logo Cloud Marquee */}
+          <LogoCloudMarquee title="Trusted by International Athletes & Dojos Worldwide" />
 
           {/* 3. From Training Photo to Professional Artwork (Before & After) */}
           <section className="px-6 py-12 sm:py-16 border-t border-white/10">
