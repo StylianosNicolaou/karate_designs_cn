@@ -17,10 +17,10 @@ export default function Footer() {
         <div className="text-sm tracking-wide font-medium">
           &copy; {year} Karate Designs CN. All rights reserved. Powered by{" "}
           <a
-            href="https://ace-portfolio-theta.vercel.app/"
+            href="https://www.solviin.com/"
             className="text-primary hover:text-primary/80 transition"
           >
-            ACE
+            solviin
           </a>
         </div>
 
