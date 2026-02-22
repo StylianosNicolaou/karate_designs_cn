@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Head from "next/head";
@@ -10,8 +10,6 @@ import {
   PhotoIcon,
   PaintBrushIcon,
   ClockIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 import { useCart } from "../components/CartProvider";
 import { getServiceById } from "../lib/services";
@@ -24,18 +22,26 @@ import "react-before-after-slider-component/dist/build.css";
 
 const POSTER_SERVICE_ID = "poster-ads";
 
-// Carousel posters from public/images
-const CAROUSEL_POSTERS = [
-  { src: "/images/poster1.jpg", alt: "Example athlete poster 1" },
-  { src: "/images/poster8.jpg", alt: "Example athlete poster 2" },
-  { src: "/images/poster15.jpg", alt: "Example athlete poster 3" },
-];
+// How it works step images (public/how-it-works/1.png … 4.png)
+const HOW_IT_WORKS_IMAGES = [1, 2, 3, 4].map((n) => ({
+  src: `/how-it-works/${n}.png`,
+  alt: `How it works step ${n}`,
+}));
+/** How long each image is shown (milliseconds) */
+const HOW_IT_WORKS_DURATION_MS = 1000;
 
 export default function PosterLandingPage() {
   const router = useRouter();
   const { addItem, clearCart } = useCart();
   const service = getServiceById(POSTER_SERVICE_ID);
-  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [howItWorksIndex, setHowItWorksIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setHowItWorksIndex((i) => (i + 1) % HOW_IT_WORKS_IMAGES.length);
+    }, HOW_IT_WORKS_DURATION_MS);
+    return () => clearInterval(id);
+  }, []);
 
   const handleGetPoster = () => {
     if (!service) return;
@@ -45,13 +51,6 @@ export default function PosterLandingPage() {
   };
 
   if (!service) return null;
-
-  const nextSlide = () =>
-    setCarouselIndex((i) => (i + 1) % CAROUSEL_POSTERS.length);
-  const prevSlide = () =>
-    setCarouselIndex(
-      (i) => (i - 1 + CAROUSEL_POSTERS.length) % CAROUSEL_POSTERS.length,
-    );
 
   return (
     <>
@@ -241,7 +240,7 @@ export default function PosterLandingPage() {
             </motion.div>
           </section>
 
-          {/* 5. How It Works (Carousel) */}
+          {/* 5. How It Works — single placeholder cycling through images 1→2→3→4 */}
           <section className="px-6 py-12 sm:py-16 border-t border-white/10">
             <motion.h2
               className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-10"
@@ -252,61 +251,37 @@ export default function PosterLandingPage() {
               How It Works
             </motion.h2>
             <motion.div
-              className="max-w-2xl mx-auto"
+              className="max-w-lg mx-auto"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <div className="relative flex items-center gap-4">
-                <button
-                  type="button"
-                  onClick={prevSlide}
-                  className="absolute left-0 z-10 -translate-x-2 sm:-translate-x-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition text-white"
-                  aria-label="Previous example"
+              <div className="relative rounded-xl overflow-hidden border border-white/10 bg-charcoal">
+                <span
+                  className="absolute top-2 left-2 z-10 flex h-6 w-6 items-center justify-center rounded-full bg-white text-charcoal text-xs font-bold shadow"
+                  aria-hidden
                 >
-                  <ChevronLeftIcon className="w-6 h-6" />
-                </button>
-                <div className="flex-1 relative aspect-square max-w-sm mx-auto rounded-xl overflow-hidden border border-white/10">
-                  <AnimatePresence mode="wait">
+                  {howItWorksIndex + 1}
+                </span>
+                <div className="relative w-full aspect-[3/4]">
+                  <AnimatePresence initial={false}>
                     <motion.div
-                      key={carouselIndex}
+                      key={howItWorksIndex}
                       className="absolute inset-0"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.3 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
                     >
-                      <Image
-                        src={CAROUSEL_POSTERS[carouselIndex].src}
-                        alt={CAROUSEL_POSTERS[carouselIndex].alt}
-                        fill
-                        sizes="(max-width: 640px) 100vw, 448px"
-                        className="object-cover"
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={HOW_IT_WORKS_IMAGES[howItWorksIndex].src}
+                        alt={HOW_IT_WORKS_IMAGES[howItWorksIndex].alt}
+                        className="h-full w-full object-contain"
                       />
                     </motion.div>
                   </AnimatePresence>
                 </div>
-                <button
-                  type="button"
-                  onClick={nextSlide}
-                  className="absolute right-0 z-10 translate-x-2 sm:translate-x-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition text-white"
-                  aria-label="Next example"
-                >
-                  <ChevronRightIcon className="w-6 h-6" />
-                </button>
-              </div>
-              <div className="flex justify-center gap-2 mt-6">
-                {CAROUSEL_POSTERS.map((_, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => setCarouselIndex(i)}
-                    className={`w-2 h-2 rounded-full transition ${
-                      i === carouselIndex ? "bg-primary w-6" : "bg-white/40"
-                    }`}
-                    aria-label={`Go to slide ${i + 1}`}
-                  />
-                ))}
               </div>
             </motion.div>
           </section>
