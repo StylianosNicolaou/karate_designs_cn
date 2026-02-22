@@ -326,10 +326,11 @@ export default function PosterLandingPage() {
                     <span className="text-primary">✓</span> Custom Design
                   </li>
                   <li className="text-white/90 flex items-center gap-2">
-                    <span className="text-primary">✓</span> Unlimited Revisions
+                    <span className="text-primary">✓</span> High Resolution
                   </li>
                   <li className="text-white/90 flex items-center gap-2">
-                    <span className="text-primary">✓</span> High Resolution
+                    <span className="text-primary">✓</span> 46 - 72 Hour
+                    Delivery
                   </li>
                 </ul>
                 <LiquidGlassButton
