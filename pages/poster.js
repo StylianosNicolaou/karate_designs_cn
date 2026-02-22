@@ -19,6 +19,8 @@ import LiquidGlassButton from "../components/LiquidGlassButton";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import LogoCloudMarquee from "../components/LogoCloudMarquee";
+import ReactBeforeSliderComponent from "react-before-after-slider-component";
+import "react-before-after-slider-component/dist/build.css";
 
 const POSTER_SERVICE_ID = "poster-ads";
 
@@ -84,7 +86,7 @@ export default function PosterLandingPage() {
             {/* Full-width background image */}
             <div className="absolute inset-0 w-full">
               <Image
-                src="/images/poster1.jpg"
+                src="/images/poster-bg.png"
                 alt="Karate athlete poster"
                 fill
                 sizes="100vw"
@@ -104,12 +106,12 @@ export default function PosterLandingPage() {
             {/* Text and CTA overlaid on image */}
             <div className="relative z-20 flex flex-1 flex-col items-center justify-center text-center px-6 py-20">
               <motion.h1
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 drop-shadow-lg"
+                className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white leading-tight mb-4 drop-shadow-lg"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                Turn Your Best Moment Into Art.
+                Turn Your Best Moments Into Art.
               </motion.h1>
               <motion.p
                 className="text-white text-lg sm:text-xl md:text-2xl mb-2 drop-shadow-md"
@@ -125,7 +127,8 @@ export default function PosterLandingPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.5 }}
               >
-                Official Designer - European Karate Championships 2026
+                Official Designer for International Karate Events and Elite
+                Athletes
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
@@ -149,76 +152,52 @@ export default function PosterLandingPage() {
                 <span className="text-primary" aria-hidden>
                   ✓
                 </span>
-                Trusted by 500+ athletes worldwide
+                Trusted by 600+ Athletes & Dojos Worldwide
               </motion.p>
             </div>
           </section>
 
           {/* 2. Trust & Social Proof — Logo Cloud Marquee */}
-          <LogoCloudMarquee title="Trusted by International Athletes & Dojos Worldwide" />
+          <LogoCloudMarquee title="Official Design Partner" />
 
           {/* 3. From Training Photo to Professional Artwork (Before & After) */}
           <section className="px-6 py-12 sm:py-16 border-t border-white/10">
-            <motion.h2
-              className="text-center text-xl sm:text-2xl font-semibold text-white mb-10"
+            <motion.h1
+              className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-10"
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
               From Training Photo to Professional Artwork
-            </motion.h2>
+            </motion.h1>
             <motion.div
-              className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 items-center"
+              className="poster-before-after-slider max-w-lg mx-auto rounded-xl overflow-hidden border border-white/10"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-white/10">
-                <Image
-                  src="/images/poster1.jpg"
-                  alt="Before - training photo"
-                  fill
-                  sizes="(max-width: 640px) 100vw, 400px"
-                  className="object-cover"
-                />
-                <span className="absolute bottom-3 left-3 text-white text-sm font-medium bg-black/60 px-2 py-1 rounded">
-                  Before
-                </span>
-              </div>
-              <div className="flex justify-center text-white/60" aria-hidden>
-                <svg
-                  className="w-8 h-8 sm:w-10 sm:h-10 rotate-90 sm:rotate-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </div>
-              <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-white/10">
-                <Image
-                  src="/images/poster5.jpg"
-                  alt="After - professional poster"
-                  fill
-                  sizes="(max-width: 640px) 100vw, 400px"
-                  className="object-cover"
-                />
-                <span className="absolute bottom-3 left-3 text-white text-sm font-medium bg-black/60 px-2 py-1 rounded">
-                  After
-                </span>
-              </div>
+              <ReactBeforeSliderComponent
+                firstImage={{
+                  imageUrl: "/images/after.png",
+                }}
+                secondImage={{
+                  imageUrl: "/images/before.png",
+                }}
+                delimiterIconStyles={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='24' viewBox='0 0 32 24' fill='none' stroke='%23000' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 18L4 12l6-6'/%3E%3Cpath d='M22 18l6-6-6-6'/%3E%3C/svg%3E")`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  backgroundSize: "18px 14px",
+                  backgroundColor: "#fff",
+                }}
+              />
             </motion.div>
           </section>
 
           {/* 4. What You Get */}
           <section className="px-6 py-12 sm:py-16 border-t border-white/10">
             <motion.h2
-              className="text-center text-xl sm:text-2xl font-semibold text-white mb-10"
+              className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-10"
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -238,7 +217,7 @@ export default function PosterLandingPage() {
                 },
                 {
                   icon: PhotoIcon,
-                  text: "Instagram & Print Ready",
+                  text: "Social Media & Print Ready",
                 },
                 {
                   icon: PaintBrushIcon,
@@ -254,8 +233,8 @@ export default function PosterLandingPage() {
                   className="flex flex-col items-center text-center gap-3"
                 >
                   <item.icon className="w-10 h-10 text-primary" aria-hidden />
-                  <p className="text-white flex items-center gap-2">
-                    <span className="text-primary">✓</span> {item.text}
+                  <p className="text-white text-base sm:text-lg font-normal flex items-center justify-center gap-2 text-center">
+                    <span className="text-primary shrink-0">✓</span> {item.text}
                   </p>
                 </div>
               ))}
@@ -265,7 +244,7 @@ export default function PosterLandingPage() {
           {/* 5. How It Works (Carousel) */}
           <section className="px-6 py-12 sm:py-16 border-t border-white/10">
             <motion.h2
-              className="text-center text-xl sm:text-2xl font-semibold text-white mb-10"
+              className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-10"
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -335,7 +314,7 @@ export default function PosterLandingPage() {
           {/* 6. Why Choose Karate Designs by CN */}
           <section className="px-6 py-12 sm:py-16 border-t border-white/10">
             <motion.h2
-              className="text-center text-xl sm:text-2xl font-semibold text-white mb-10"
+              className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-10"
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -350,20 +329,20 @@ export default function PosterLandingPage() {
             >
               <div className="space-y-4">
                 <p className="text-white flex items-center gap-2">
-                  <span className="text-primary">✓</span> Official EKF 2026
-                  Designer
+                  <span className="text-primary">✓</span> Official Designer for
+                  International Karate Events and Elite Athletes
                 </p>
                 <p className="text-white flex items-center gap-2">
-                  <span className="text-primary">✓</span> 500+ Athletes
+                  <span className="text-primary">✓</span> 600+ Athletes
                   Worldwide
                 </p>
                 <p className="text-white flex items-center gap-2">
-                  <span className="text-primary">✓</span> Specialists in Karate
-                  & Combat Sports
+                  <span className="text-primary">✓</span> Specialist in Karate &
+                  Combat Sports
                 </p>
               </div>
               <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-                <h3 className="text-white font-semibold text-lg mb-4">
+                <h3 className="text-white font-semibold text-xl sm:text-2xl mb-4">
                   Professional Athlete Poster
                 </h3>
                 <p className="text-primary font-bold text-3xl mb-4">€40</p>
@@ -386,31 +365,6 @@ export default function PosterLandingPage() {
                   ORDER NOW
                 </LiquidGlassButton>
               </div>
-            </motion.div>
-          </section>
-
-          {/* 7. Footer / Final CTA */}
-          <section className="px-6 py-16 sm:py-20 border-t border-white/10 text-center">
-            <motion.h2
-              className="text-xl sm:text-2xl font-semibold text-white mb-8"
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              Your Hard Work Deserves to Be Seen.
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <LiquidGlassButton
-                onClick={handleGetPoster}
-                size="lg"
-                className="!px-10 !py-4 text-lg"
-              >
-                GET YOUR POSTER TODAY!
-              </LiquidGlassButton>
             </motion.div>
           </section>
         </main>

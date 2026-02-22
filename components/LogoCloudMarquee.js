@@ -32,7 +32,7 @@ export default function LogoCloudMarquee({
     <section className="relative w-full overflow-hidden border-t border-white/10 px-6 py-12 sm:py-16">
       {title && (
         <motion.h2
-          className="text-center text-xl sm:text-2xl font-semibold text-white mb-10"
+          className="text-center text-2xl sm:text-3xl md:text-4xl font-semibold text-white mb-10"
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -43,7 +43,12 @@ export default function LogoCloudMarquee({
 
       {/* Top row — first half of logos, scrolls right */}
       <div className="relative mb-6" style={maskStyle}>
-        <Marquee speed={40} pauseOnHover gradient={false}>
+        <Marquee
+          speed={40}
+          pauseOnHover={false}
+          direction="right"
+          gradient={false}
+        >
           {topDuplicated.map((src, i) => (
             <div
               key={`top-${i}`}
@@ -61,7 +66,12 @@ export default function LogoCloudMarquee({
 
       {/* Bottom row — second half of logos, scrolls left */}
       <div className="relative" style={maskStyle}>
-        <Marquee speed={28} direction="left" pauseOnHover gradient={false}>
+        <Marquee
+          speed={28}
+          direction="left"
+          pauseOnHover={false}
+          gradient={false}
+        >
           {bottomDuplicated.map((src, i) => (
             <div
               key={`bottom-${i}`}

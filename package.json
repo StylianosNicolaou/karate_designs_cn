@@ -27,6 +27,7 @@
     "next-seo": "^6.6.0",
     "nodemailer": "^7.0.5",
     "react": "^19.0.0",
+    "react-before-after-slider-component": "^1.1.8",
     "react-dom": "^19.0.0",
     "react-fast-marquee": "^1.6.5",
     "react-hook-form": "^7.55.0",

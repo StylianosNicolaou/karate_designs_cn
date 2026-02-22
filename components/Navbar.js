@@ -67,6 +67,12 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center space-x-4 shrink-0">
           <a
+            href="/poster"
+            className="nav-special-offer-glow text-white font-semibold hover:text-white [-webkit-text-stroke:1px_var(--brand-violet)]"
+          >
+            Special Offer
+          </a>
+          <a
             href="/#gallery"
             className="text-white hover:text-primary transition"
           >
@@ -168,6 +174,13 @@ export default function Navbar() {
 
                 {/* Links */}
                 <div className="flex-1 px-6 py-8 space-y-6">
+                  <a
+                    href="/poster"
+                    onClick={closeMobileMenu}
+                    className="nav-special-offer-glow block text-white text-lg font-semibold py-2 [-webkit-text-stroke:1px_var(--brand-violet)]"
+                  >
+                    Special Offer
+                  </a>
                   <a
                     href="/#gallery"
                     onClick={closeMobileMenu}

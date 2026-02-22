@@ -238,11 +238,12 @@ export default function ServicesGrid() {
             {/* Header */}
             <button
               onClick={() => toggle(idx)}
-              className="w-full flex justify-between items-center px-6 py-4 text-white font-medium text-lg sm:text-m hover:bg-white/10 transition"
+              className="w-full flex justify-between items-center px-6 py-4 text-white font-heading font-medium text-lg sm:text-m hover:bg-white/10 transition"
+              aria-expanded={openIndex === idx}
             >
               <div className="flex items-center gap-3">
                 {cat.icon}
-                {cat.title}
+                <span>{cat.title}</span>
               </div>
               {openIndex === idx ? <FaChevronUp /> : <FaChevronDown />}
             </button>

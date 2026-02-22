@@ -40,8 +40,10 @@ module.exports = {
           "radial-gradient(circle, rgba(255, 46, 154, 0.4) 0%, transparent 70%)",
       },
       fontFamily: {
-        sans: ["Poppins", "sans-serif"],
-        caudex: ["Caudex", "sans-serif"],
+        sans: ["Barlow", "sans-serif"],
+        body: ["Barlow", "sans-serif"],
+        caudex: ["Barlow", "sans-serif"],
+        heading: ["Bebas Neue", "sans-serif"],
       },
       fontSize: {
         xs: "0.675rem", // ~10.8px

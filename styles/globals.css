@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
 
 /* ═══════════════════════════════════════════════════════════════════════════
    Dark-First Premium Tech Palette (Brand DNA: Violet / Magenta / Coral)
@@ -16,7 +16,7 @@
   --accent-magenta: #ff2e9a; /* Neon Magenta */
   --accent-coral: #ff5a3c; /* Coral Red – CTA glow, badges, signals */
   /* Text */
-  --text-primary: #f2f2f7; /* Soft White */
+  --text-primary: #f4f2f7; /* Soft White */
   --text-secondary: #a1a1b3; /* Cool Gray */
   --text-muted: #6b6b80; /* Slate Gray */
   /* Magenta scale (production) */
@@ -41,6 +41,20 @@
   );
 }
 
+/* Special Offer nav – outline glow pulse */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    text-shadow: 0 0 10px rgba(255, 46, 154, 0.6), 0 0 20px rgba(255, 46, 154, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 16px rgba(255, 46, 154, 0.9), 0 0 28px rgba(255, 46, 154, 0.5);
+  }
+}
+.nav-special-offer-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
 /* 🔁 SVG Background Animation */
 @keyframes pan {
   0% {
@@ -55,7 +69,21 @@ body {
   @apply text-base;
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: "Caudex", sans-serif;
+  font-family: "Barlow", sans-serif;
+}
+
+/* Captions and small text inherit DIN-style body font from body */
+
+/* Headings and titles use Bebas Neue – !important so Tailwind/other layers don’t override */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+  font-family: "Bebas Neue", sans-serif !important;
+  letter-spacing: 0.02em;
 }
 
 .masonry-column {
