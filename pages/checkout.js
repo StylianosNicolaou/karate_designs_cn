@@ -97,29 +97,14 @@ export default function Checkout() {
       const { uploadedFiles } = await response.json();
       console.log("Upload response:", uploadedFiles);
 
-      // Update cart with uploaded file URLs for specific section
+      // Append uploaded files to existing files for this item
       const currentItem = items.find((item) => item.id === itemId);
       const currentFiles = currentItem?.uploadedFiles || [];
 
-      // Create section-specific files array
-      const sectionFiles = currentFiles.filter(
-        (file) => file.sectionIndex !== sectionIndex,
-      );
       const newFiles = [
-        ...sectionFiles,
+        ...currentFiles,
         ...uploadedFiles.map((file) => ({ ...file, sectionIndex })),
       ];
-
-      console.log("Section files before:", sectionFiles);
-      console.log("New files with section index:", newFiles);
-
-      console.log(
-        "Updated files for item:",
-        itemId,
-        "section:",
-        sectionIndex,
-        newFiles,
-      );
 
       updateFiles(itemId, newFiles);
 
